@@ -3,7 +3,9 @@ const handlebars = require('express-handlebars');
 const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config/config');
-const router = require('./controllers/router')
+const router = require('./controllers/router');
+const mongoose = require('mongoose')
+
 app.engine('hbs', handlebars({
     defaultLayout: 'main',
     extname: '.hbs'
