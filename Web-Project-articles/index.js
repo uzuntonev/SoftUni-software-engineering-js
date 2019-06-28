@@ -8,11 +8,14 @@ app.engine('hbs', handlebars({
 }));
 app.set('view engine', 'hbs');
 
-
 app.use(express.static('./public'));
 
 app.get('/', (req,res) => {
     res.render('home/index');
+});
+
+app.get('/articles', (req, res) => {
+res.render('articles/index');
 });
 
 
