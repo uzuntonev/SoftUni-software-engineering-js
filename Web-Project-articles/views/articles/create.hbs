@@ -1,11 +1,11 @@
-<form>
+<form method="POST" action="/articles/create">
   <div class="form-group">
-    <label for="formGroupExampleInput">Example label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Article title">
+    <label for="formGroupExampleInput">Title</label>
+    <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Article title">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">Another label</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Article content">
+    <label for="formGroupExampleInput2">Content</label>
+    <input type="text" name="content" class="form-control" id="formGroupExampleInput2" placeholder="Article content">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

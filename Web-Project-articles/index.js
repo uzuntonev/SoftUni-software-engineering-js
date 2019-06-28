@@ -1,26 +1,31 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const app = express();
-
+const bodyParser = require('body-parser');
+const config = require('./config/config')
+const articlesControler = require('./controllers/articles-controller')
 app.engine('hbs', handlebars({
     defaultLayout: 'main',
     extname: '.hbs'
 }));
+
 app.set('view engine', 'hbs');
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.use(express.static('./public'));
 
-app.get('/', (req, res) => {
-    res.render('home/index');
-});
-app.get('/articles', (req, res) => {
-    res.render('articles/index');
-});
+app.get('/', articlesControler.getIndex);
 
-app.get('/articles/create', (req, res) => {
-    res.render('articles/create');
-});
+app.get('/articles/create', articlesControler.getCreate);
+
+app.post('/articles/create', articlesControler.postCreate);
+
+app.get('/articles', articlesControler.getArticels);
 
 
 
-app.listen(3000, () => console.log(`Listening on port 3000`)); 
+
+app.listen(config.port, () => console.log(`Listening on port ${config.port}`)); 
