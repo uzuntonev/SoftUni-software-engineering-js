@@ -1,15 +1,30 @@
+const Articel = require('../model/article');
+
 module.exports = {
+    
     getCreate: function (req, res) {
         res.render('articles/create');
     },
-    postCreate: function  (req, res) {
-        console.log(req.body);
-        res.end();
+
+    postCreate: function (req, res) {
+        let article = new Articel({
+            title: req.body.title,
+            content: req.body.content,
+            author: req.body.author
+        });
+        article.save((err, dbArticle) => {
+
+           res.redirect('/articles'); 
+        });
     },
-    getArticels: function (req, res) {
-        res.render('articles/index');
+    index (req, res) {
+        Articel.find({})
+        .then(function (articles){
+            res.render('articles/index', {articles})
+        })
     },
-    getIndex: function  (req, res) {
+    getIndex: function (req, res) {
+
         res.render('home/index');
     }
 }

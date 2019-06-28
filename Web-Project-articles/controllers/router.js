@@ -1,14 +1,17 @@
-const articlesControler = require('./articles-controller');
+const articlesController = require('./articles-controller');
+const authorController = require('./authors-controller')
 
 function router (app) {
     
-    app.get('/', articlesControler.getIndex);
+    app.get('/', articlesController.getIndex);
 
-    app.get('/articles/create', articlesControler.getCreate);
+    app.get('/articles/create', articlesController.getCreate);
 
-    app.post('/articles/create', articlesControler.postCreate);
+    app.post('/articles/create', articlesController.postCreate);
 
-    app.get('/articles', articlesControler.getArticels);
+    app.get('/articles', articlesController.index);
+
+    app.get('/authors', authorController.index);
 
 }
 module.exports = router;
