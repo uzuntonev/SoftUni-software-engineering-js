@@ -13,5 +13,7 @@ function router (app) {
 
     app.get('/authors', authorController.index);
 
+    app.get('/authors/:name/articles', articlesController.getByAuthor)
+
 }
 module.exports = router;

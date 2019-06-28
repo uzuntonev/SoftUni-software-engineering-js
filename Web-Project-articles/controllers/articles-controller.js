@@ -26,5 +26,12 @@ module.exports = {
     getIndex: function (req, res) {
 
         res.render('home/index');
+    },
+
+    getByAuthor (req,res) {
+        Articel.find({author: req.params.name})
+        .then(function (data){
+            res.render('articles/index', {articles: data} )
+        })
     }
 }
