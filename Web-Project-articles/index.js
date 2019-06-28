@@ -2,8 +2,8 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const app = express();
 const bodyParser = require('body-parser');
-const config = require('./config/config')
-const articlesControler = require('./controllers/articles-controller')
+const config = require('./config/config');
+const router = require('./controllers/router')
 app.engine('hbs', handlebars({
     defaultLayout: 'main',
     extname: '.hbs'
@@ -17,14 +17,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static('./public'));
 
-app.get('/', articlesControler.getIndex);
-
-app.get('/articles/create', articlesControler.getCreate);
-
-app.post('/articles/create', articlesControler.postCreate);
-
-app.get('/articles', articlesControler.getArticels);
-
+router(app);
 
 
 

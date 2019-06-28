@@ -4,6 +4,7 @@ module.exports = {
     },
     postCreate: function  (req, res) {
         console.log(req.body);
+        res.end();
     },
     getArticels: function (req, res) {
         res.render('articles/index');
