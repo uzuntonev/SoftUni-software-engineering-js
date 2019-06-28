@@ -4,7 +4,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config/config');
 const router = require('./controllers/router');
-const mongoose = require('mongoose')
+const db = require('./config/database');
+
+db(config);
 
 app.engine('hbs', handlebars({
     defaultLayout: 'main',
@@ -16,6 +18,7 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 
 app.use(express.static('./public'));
 
