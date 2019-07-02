@@ -3,16 +3,17 @@ function solve(input) {
     let map = new Map();
     for (const line of input) {
         let [name, ...cards] = line.split(': ');
-console.log(Object.keys(uniq(cards)))
+       cards = cards[0].split(', ')
+
         if (!map.has(name)) {
             map.set(name, cards)
         } else {
-            map.set(name, Object.keys(uniq(map.get(name))).push(Object.keys(uniq(cards))))
+            map.set(name, Object.keys(uniq(map.get(name))).concat(Object.keys(uniq(cards))))
         }
     }
+let entries = map.entries()
 
-
-    console.log(map)
+     console.log(entries)
 }
 
 solve([
@@ -24,9 +25,6 @@ solve([
     'Peter: JD, JD, JD, JD, JD, JD'
 ]
 );
-
-
-var arr = ['JD', 'JD', 'JD', 'JD', 'JD', 'JD']
 
 function uniq( names ){
  let result = names
@@ -40,5 +38,5 @@ function uniq( names ){
   return result;
 }
 
-let a = Object.keys(uniq(arr))
-console.log(a.join(''))
+
+//console.log(a.join(''))
