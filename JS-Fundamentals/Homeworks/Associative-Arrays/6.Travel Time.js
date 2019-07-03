@@ -19,16 +19,11 @@ function solve(input) {
             }
         }
     }
-    let a = Object.entries(list)
-
-    let keys = Object.keys(list)
-        .sort((a, b) => a[0].localeCompare(b[0]));
-    let values = Object.values(list)
-        .map(e => Object.entries(e))
-    
-
-
-    console.log(values)
+    let a = Object.entries(list).sort((a, b) => a[0].localeCompare(b[0]))
+    for (const line of a) {
+        let obj = [...Object.entries(line[1])].map(e => e.join(' -> '))
+        console.log(`${line[0]} -> ${obj.join(' ')}`)
+    }
 }
 
 solve([

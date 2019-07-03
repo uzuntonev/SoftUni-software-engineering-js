@@ -5,7 +5,7 @@ function solve(input) {
             if(input[i] in list){
                 list[input[i]] += Number(input[i + 1])
             }else {
-                list[input[i]] = Number(input[i + 1])
+            list[input[i]] = Number(input[i + 1])
 
             }
         }
