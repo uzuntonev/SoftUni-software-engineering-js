@@ -15,12 +15,13 @@ function solve(input) {
                 }
             } else {
                 list[country][town] = price
-
             }
         }
     }
-    let a = Object.entries(list).sort((a, b) => a[0].localeCompare(b[0]))
-    for (const line of a) {
+     list = Object.entries(list)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+
+    for (const line of list) {
         let obj = [...Object.entries(line[1])].map(e => e.join(' -> '))
         console.log(`${line[0]} -> ${obj.join(' ')}`)
     }
