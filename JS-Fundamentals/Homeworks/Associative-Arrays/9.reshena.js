@@ -68,7 +68,7 @@ function solve(input) {
         currentInput = input.shift().split(' -> ');
     }
     let output = [...(sheetGladiators.entries())];
-    console.log(output)
+  
  
     for (curGladiator of output) {
         curGladiator[1].sort((a, b) => b[1] - a[1]);

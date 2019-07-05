@@ -18,6 +18,7 @@ function solve(input) {
                     for (let j = 0; j < second.length; j += 2) {
                         if (first[i] == second[j]) {
                             isEqualTechniques = true;
+                            break;
                         }
                     }
                 }
@@ -55,16 +56,18 @@ function solve(input) {
             }
         }
     }
-    
+
     let entries = Object.entries(list)
-            .sort((a, b) => b[0].localeCompare(a[0]))
-            .sort((a, b) => b[1][0] - a[1][0]);
+        .sort((a, b) => {
+            if (a[1][0] == b[1][0]) { return b[0].localeCompare(a[0]) }
+        })
+        .sort((a, b) => b[1][0] - a[1][0]);
 
     for (const line of entries) {
         let totalSkill = line[1].shift();
         console.log(`${line[0]}: ${totalSkill} skill`);
         line[1]
-            .sort((a,b) => a[0].localeCompare(b[0]))
+            .sort((a, b) => a[0].localeCompare(b[0]))
             .sort((a, b) => b[1] - a[1])
             .forEach(e => console.log(`- ${e[0]} <!> ${e[1]}`));
     }

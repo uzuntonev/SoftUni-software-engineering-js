@@ -1,22 +1,31 @@
 function solve(input) {
 
-let indexOfParty = input.indexOf('PARTY');
-let list = input.slice(0, indexOfParty);
-let guest = input.slice(indexOfParty + 1);
+    let indexOfParty = input.indexOf('PARTY');
+    let list = input.slice(0, indexOfParty);
+    let guests = input.slice(indexOfParty + 1);
 
-let obj = {};
-for (const line of list) {
-    obj[line] = 1
-}
-for (const line of guest) {
-    if(line in obj){
-        delete obj[line]
+    for (const guest of guests) {
+        if (list.includes(guest)) {
+            list.splice(list.indexOf(guest), 1);
+        }
     }
-}
-console.log(Object.entries(obj).length)
-Object.entries(obj).forEach(e => console.log(e[0]))
 
+    console.log(list.length);
+
+    let vip = [];
+    let other = [];
+    for (let i = 0; i < list.length; i++) {
+        if (isNaN(list[i][0])) {
+            other.push(list[i]);
+        } else {
+
+            vip.push(list[i]);
+        }
+    }
+    vip.forEach(e => console.log(e));
+    other.forEach(e => console.log(e));
 }
+
 
 solve([
     '7IK9Yo0h',

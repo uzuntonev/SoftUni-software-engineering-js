@@ -1,19 +1,49 @@
 function solve(input) {
-
-    let map = new Map();
+    let list = {};
+    let powerCards = {
+        J: 11,
+        Q: 12,
+        K: 13,
+        A: 14
+    };
+    let typeCards = {
+        C: 1,
+        D: 2,
+        H: 3,
+        S: 4
+    }
     for (const line of input) {
-        let [name, ...cards] = line.split(': ');
-       cards = cards[0].split(', ')
-
-        if (!map.has(name)) {
-            map.set(name, cards)
+        let [name, cards] = line.split(': ');
+        if (!(name in list)) {
+            list[name] = new Set([...cards.split(', ')]);
         } else {
-            map.set(name, Object.keys(uniq(map.get(name))).concat(Object.keys(uniq(cards))))
+            let cardsArr = cards.split(', ')
+            cardsArr.forEach(e => list[name].add(e))
         }
     }
-let entries = map.entries()
+    for (const prop in list) {
+        if (list.hasOwnProperty(prop)) {
+            let hand = [...list[prop].values()];
+            let total = 0;
+            hand.forEach(e => {
+                let splitedEl = e.split('')
 
-     console.log(entries)
+                if (isNaN(splitedEl[0])) {
+                    total += powerCards[splitedEl[0]] * typeCards[splitedEl[1]];
+                }else {
+                    if (splitedEl.length < 3){
+                        total += splitedEl[0] * typeCards[splitedEl[1]];
+                    }else {
+                        total += Number((splitedEl[0] + splitedEl[1])) * typeCards[splitedEl[2]];
+                    }
+                }
+            });
+
+            console.log(`${prop}: ${total}`)
+
+        }
+    }
+
 }
 
 solve([
@@ -26,17 +56,16 @@ solve([
 ]
 );
 
-function uniq( names ){
- let result = names
-  .map((name) => {
-    return {count: 1, name: name}
-  })
-  .reduce((a, b) => {
-    a[b.name] = (a[b.name] || 0) + b.count
-    return a
-  }, {})
-  return result;
-}
+// function uniq( names ){
+//  let result = names
+//   .map((name) => {
+//     return {count: 1, name: name}
+//   })
+//   .reduce((a, b) => {
+//     a[b.name] = (a[b.name] || 0) + b.count
+//     return a
+//   }, {})
+//   return result;
+// }
 
 
-//console.log(a.join(''))
