@@ -1,72 +1,56 @@
 function solve(input) {
     input.pop();
     let list = {};
+
     for (let line of input) {
+
         if (line.includes('vs')) {
             let [firstGladiator, secondGladiator] = line.split(' vs ');
-            if (firstGladiator in list && secondGladiator in list) {
+            if ((firstGladiator in list) && (secondGladiator in list)) {
                 let firstGladiatorTechniques = list[firstGladiator];
                 let secondGladiatorTechniques = list[secondGladiator];
-                let firstTotal = firstGladiatorTechniques.shift();
-                let secondTotal = secondGladiatorTechniques.shift();
-                let first = firstGladiatorTechniques.map(e => e.join(' ')).join(' ').split(' ')
-                let second = secondGladiatorTechniques.map(e => e.join(' ')).join(' ').split(' ')
 
-                let isEqualTechniques = false;
-
-                for (let i = 0; i < first.length; i += 2) {
-                    for (let j = 0; j < second.length; j += 2) {
-                        if (first[i] == second[j]) {
-                            isEqualTechniques = true;
-                            break;
+                for (const key in firstGladiatorTechniques) {
+                    if (firstGladiatorTechniques.hasOwnProperty(key)) {
+                        if ((key in secondGladiatorTechniques) && (key !== 'totalSkill')) {
+                            if (firstGladiatorTechniques.totalSkill > secondGladiatorTechniques.totalSkill) {
+                                delete list[secondGladiator];
+                                break;
+                            }else {
+                                delete list[firstGladiator];
+                                break
+                            }
                         }
                     }
-                }
-                if (isEqualTechniques) {
-                    if (firstTotal > secondTotal) {
-                        delete list[secondGladiator];
-                        list[firstGladiator].unshift(firstTotal);
-                    } else {
-                        delete list[firstGladiator];
-                        list[secondGladiator].unshift(secondTotal);
-                    }
-                } else {
-                    list[firstGladiator].unshift(firstTotal);
-                    list[secondGladiator].unshift(secondTotal);
                 }
             }
         } else {
             let [gladiator, technique, skill] = line.split(' -> ');
             skill = Number(skill)
             if (!(gladiator in list)) {
-                list[gladiator] = [[technique, skill]];
-                list[gladiator].unshift(skill)
+                list[gladiator] = { [technique]: skill };
+                list[gladiator].totalSkill = skill
             } else {
-                if (!list[gladiator].includes(technique)) {
-                    list[gladiator].push([technique, skill]);
-                    list[gladiator][0] += skill;
-
+                if (!(technique in list[gladiator])) {
+                    list[gladiator][technique] = skill;
+                    list[gladiator].totalSkill += skill;
                 } else {
-                    let index = list[gladiator].indexOf(technique);
-                    if (list[gladiator][index + 1] < skill) {
-                        list[gladiator][index + 1] = skill;
-                        list[gladiator][0] += skill - list[gladiator][index + 1];
+                    if (list[gladiator][technique] < skill) {
+                        list[gladiator].totalSkill = list[gladiator][technique] - skill;
+                        list[gladiator][technique] = skill;
                     }
                 }
             }
         }
     }
-
     let entries = Object.entries(list)
-        .sort((a, b) => {
-            if (a[1][0] == b[1][0]) { return b[0].localeCompare(a[0]) }
-        })
-        .sort((a, b) => b[1][0] - a[1][0]);
-
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .sort((a, b) => b[1].totalSkill - a[1].totalSkill);
+      
     for (const line of entries) {
-        let totalSkill = line[1].shift();
-        console.log(`${line[0]}: ${totalSkill} skill`);
-        line[1]
+        console.log(`${line[0]}: ${line[1].totalSkill} skill`);
+        delete line[1].totalSkill;
+        Object.entries(line[1])
             .sort((a, b) => a[0].localeCompare(b[0]))
             .sort((a, b) => b[1] - a[1])
             .forEach(e => console.log(`- ${e[0]} <!> ${e[1]}`));

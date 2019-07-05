@@ -22,7 +22,9 @@ function solve(input) {
         .sort((a, b) => a[0].localeCompare(b[0]))
 
     for (const line of list) {
-        let obj = [...Object.entries(line[1])].map(e => e.join(' -> '))
+        let obj = [...Object.entries(line[1])]
+        .sort((a, b) => a[1] - b[1])
+        .map(e => e.join(' -> '))
         console.log(`${line[0]} -> ${obj.join(' ')}`)
     }
 }

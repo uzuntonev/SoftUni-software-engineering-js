@@ -11,7 +11,7 @@ function solve(input) {
         D: 2,
         H: 3,
         S: 4
-    }
+    };
     for (const line of input) {
         let [name, cards] = line.split(': ');
         if (!(name in list)) {
