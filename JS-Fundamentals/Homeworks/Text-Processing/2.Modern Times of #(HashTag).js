@@ -7,4 +7,8 @@ function solve(input) {
     });
 }
 
+time = (sentance) => sentance.match(new RegExp('#[a-z]+\\w', 'gi')).forEach(elem => console.log(elem.slice(1)));
+
 solve('Nowadays everyone uses # to tag a #special word in #socialMedia');
+
+time('Nowadays everyone uses # to tag a #special word in #socialMedia');
