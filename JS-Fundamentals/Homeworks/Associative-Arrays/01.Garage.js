@@ -4,19 +4,38 @@ function solve(input) {
         let [garage, car] = line.split(' - ');
         garage = Number(garage)
         if (!list.has(garage)) {
-           list.set(garage, [car])
+            list.set(garage, [car])
         } else {
-    list.get(garage).push(car)
+            list.get(garage).push(car)
         }
     }
-[...list.entries()]
+    [...list.entries()]
         .forEach(e => {
             console.log(`Garage № ${e[0]}`);
             e[1].forEach(e => console.log(`--- ${e.split(': ').join(' - ')}`))
         });
 }
 
-solve([
+// solve([
+//     '1 - color: blue, fuel type: diesel',
+//     '1 - color: red, manufacture: Audi',
+//     '2 - fuel type: petrol',
+//     '4 - color: dark blue, fuel type: diesel, manufacture: Fiat']);
+
+function garageObj(input) {
+    let list = {};
+    for (const line of input) {
+        let [garage, car] = line.split(' - ');
+        garage = (` ${garage}`)
+        !(garage in list) ? list[garage] = [car] : list[garage].push(car);
+    }
+    Object.entries(list).forEach(e => {
+        console.log(`Garage №${e[0]}`);
+        e[1].forEach(e => console.log(`--- ${e.split(': ').join(' - ')}`))
+    });
+}
+
+garageObj([
     '1 - color: blue, fuel type: diesel',
     '1 - color: red, manufacture: Audi',
     '2 - fuel type: petrol',
