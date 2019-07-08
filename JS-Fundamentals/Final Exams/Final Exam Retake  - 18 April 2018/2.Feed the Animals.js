@@ -1,6 +1,7 @@
 function solve(input) {
     input.pop();
     const list = {};
+    const objArea = {};
     for (const line of input) {
         let [command, name, food, area] = line.split(':');
         food = Number(food);
@@ -17,6 +18,7 @@ function solve(input) {
         }
     }
     console.log(`Animals:`)
+    let result = Object.entries(list);
     let output = Object.entries(list)
         .sort((a, b) => a[0].localeCompare(b[0]))
         .sort((a, b) => b[1][0] - a[1][0]);
@@ -24,9 +26,9 @@ function solve(input) {
         .forEach(e => console.log(`${e[0]} -> ${e[1][0]}g`));
 
     console.log(`Areas with hungry animals:`);
+   
 
-    const objArea = {};
-    for (const line of output) {
+    for (const line of result) {
         let area = line[1][1];
         if (!(area in objArea)) {
             objArea[area] = 1;
@@ -35,7 +37,6 @@ function solve(input) {
         }
     }
     Object.entries(objArea)
-        .sort((a, b) => b[0].localeCompare(a[0]))
         .sort((a, b) => b[1] - a[1])
         .forEach(e => {
             if (e[1] > 0) {
@@ -44,19 +45,20 @@ function solve(input) {
         })
 }
 
-// solve([
-//     'Add:Maya:7600:WaterfallArea',
-//     'Add:Bobbie:6570:DeepWoodsArea',
-//     'Add:Adam:4500:ByTheCreek',
-//     'Add:Jamie:1290:RiverArea',
-//     'Add:Gem:8730:WaterfallArea',
-//     'Add:Maya:1230:WaterfallArea',
-//     'Add:Jamie:560:RiverArea',
-//     'Feed:Bobbie:6300:DeepWoodsArea',
-//     'Feed:Adam:4650:ByTheCreek',
-//     'Feed:Jamie:2000:RiverArea',
-//     'Last Info']
-// );
+solve([
+    'Add:Maya:7600:WaterfallArea',
+    'Add:Bobbie:6570:DeepWoodsArea',
+    'Add:Adam:4500:ByTheCreek',
+    'Add:Jamie:1290:RiverArea',
+    'Add:Gem:8730:WaterfallArea',
+    'Add:Maya:1230:WaterfallArea',
+    'Add:Jamie:560:RiverArea',
+    'Feed:Bobbie:6300:DeepWoodsArea',
+    'Feed:Adam:4650:ByTheCreek',
+    'Feed:Jamie:2000:RiverArea',
+    'Last Info']
+);
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>')
 solve(['Add:Bonie:3490:RiverArea',
     'Add:Sam:5430:DeepWoodsArea',
     'Add:Bonie:200:RiverArea',
