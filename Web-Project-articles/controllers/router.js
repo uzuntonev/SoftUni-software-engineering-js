@@ -11,6 +11,9 @@ function router (app) {
 
     app.get('/articles', articlesController.index);
 
+    app.post('/articles', articlesController.postDelete);
+
+
     app.get('/authors', authorsController.index);
 
     app.get('/authors/:name/articles', articlesController.getByAuthor)

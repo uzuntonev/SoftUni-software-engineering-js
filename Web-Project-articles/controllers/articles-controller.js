@@ -17,6 +17,13 @@ module.exports = {
            res.redirect('/articles'); 
         });
     },
+    postDelete: function (req,res) {
+        console.log(req.params)
+        Articel.remove({author: 'Pesho'})
+        .then(function (articles){
+            res.render('articles/index', {articles})
+        })
+    },
     index (req, res) {
         Articel.find({})
         .then(function (articles){
