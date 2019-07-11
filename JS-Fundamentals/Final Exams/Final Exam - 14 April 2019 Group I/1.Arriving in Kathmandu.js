@@ -1,16 +1,23 @@
 function solve(input) {
     input.pop();
-    let patternMountainAndGeohashcode = /[A-Za-z0-9<]+/g;
-    let lenghtPattern = /[=][0-9]+/g;
-
+    let pattern = /^[!@#$%^&*?\w\d]+=[0-9]+<<[\w\d\s]+$/g
     for (const line of input) {
-     
-        let b = line.match(lenghtPattern);
-        result = line.replace(b, '')
-        let a = result.match(patternMountainAndGeohashcode).join('')
-        let [mountain, geohashcode] = a.split('<<');
-        console.log(mountain, geohashcode)
-        // console.log(mountain, geohashcode)
+        if (line.match(pattern)) {
+            let name = line.split('=')[0];
+            let length = line
+                .split('<<')[0]
+                .split('=')[1];
+            let geohashcode = line.split('<<')[1];
+            if (length == geohashcode.length) {
+                let namePattern = /[\w]+/g;
+                name = name.match(namePattern).join('')
+                console.log(`Coordinates found! ${name} -> ${geohashcode}`)
+            } else {
+                console.log('Nothing found!')
+            }
+        } else {
+            console.log('Nothing found!')
+        }
     }
 }
 
@@ -21,3 +28,12 @@ solve([
     '!Shiha@pan@gma##9<<tgfgegu67',
     '!###Anna@pur@na##=16<<tv5dekdz8x11ddkc',
     'Last note']);
+
+solve([
+    'Ka?!#nch@@en@ju##nga@=3<<thfbghvn',
+    '=9Cho?@#Oyu<<thvb7ydht',
+    'Nan??ga#Par!ba!t?=16<<twm03q2rx5hpmyr6',
+    'Dhau??la#gi@ri?!#=3<<bvnfhrtiuy',
+    'Last note'
+    
+]);
