@@ -1,14 +1,14 @@
 function solve(input) {
     let text = input.shift();
     let output = text.split(' ');
+    const arrOfWords = input.shift();
     for (const word of output) {
         if (word.includes('_')) {
-            let index = output.indexOf(word);
             let length = word.length;
             if (word.match(/[.,!?]/g)){
                 length -= 1;
             }
-            for (const el of input[0]) {
+            for (const el of arrOfWords) {
                 if (el.length === length) {
                    text = text.replace(word, el);
                 }
@@ -16,7 +16,6 @@ function solve(input) {
         }
     }
     console.log(text)
-
 }
 
 solve([
