@@ -27,9 +27,8 @@ function solve(input) {
         } else if (command === 'Add' && (bandName in list)) {
             let members = membersOrTime.split(', ')
             for (const member of members) {
-                if (!list[bandName].includes(member)) {
-                    list[bandName].push(member);
-                }
+                if(!list[bandName].includes(member))
+                list[bandName].push(member);
             }
         } else if (command === 'Play' && (bandName in timeObj)) {
             timeObj[bandName] += Number(membersOrTime)
@@ -60,14 +59,7 @@ solve(['Add; The Beatles; John Lennon, Paul McCartney',
     'The Beatles']
 );
 
-
-
-
+//unique element in array
 function uniqueElements(value, index, arr) {
     return arr.indexOf(value) === index;
-}
-function calculateTotalTime(obj) {
-    let totalTime = 0;
-    Object.values(obj).forEach(e => totalTime += Number(e[0]));
-    return totalTime;
 }
