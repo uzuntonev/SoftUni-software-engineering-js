@@ -3,6 +3,7 @@ function solve(input) {
     let timeObj = {};
     let lastBandName = input.pop();
 
+    
     for (const line of input) {
         let [command, bandName, membersOrTime] = line.split('; ');
         if (line == 'start of concert') {
