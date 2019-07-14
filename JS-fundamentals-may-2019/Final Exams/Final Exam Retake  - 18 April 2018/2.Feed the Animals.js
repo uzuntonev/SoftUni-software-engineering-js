@@ -58,8 +58,7 @@ solve([
     'Feed:Jamie:2000:RiverArea',
     'Last Info']
 );
-console.log('>>>>>>>>>>>>>>>>>>>>>>>>>');
-
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>')
 solve(['Add:Bonie:3490:RiverArea',
     'Add:Sam:5430:DeepWoodsArea',
     'Add:Bonie:200:RiverArea',
