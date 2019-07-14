@@ -3,11 +3,11 @@ function solve() {
    let button = document.getElementById('send');
    button.addEventListener('click', () => {
       let inputField = document.getElementById('chat_input');
-      let textField = inputField.value;
+      let text = inputField.value;
       inputField.value = '';
 
       let newMessage = document.createElement('div');
-      newMessage.textContent = textField;
+      newMessage.textContent = text;
 
       let att = document.createAttribute("class"); 
       att.value = "message my-message";
@@ -17,5 +17,4 @@ function solve() {
       parent.appendChild(newMessage)
    });
 }
-
 
