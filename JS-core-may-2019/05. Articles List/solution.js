@@ -17,7 +17,6 @@ console.log(contentValue)
 		article.appendChild(content);
 		document.getElementById('articles').appendChild(article);
 	}
-
 }
 
 
