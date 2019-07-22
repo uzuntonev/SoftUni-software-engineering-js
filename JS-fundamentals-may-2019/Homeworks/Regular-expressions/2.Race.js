@@ -18,10 +18,19 @@ function solve(input) {
             list[name] += distance
         }
     }
-    const sorted = Object.entries(list).sort((a, b) => b[1] - a[1])
+    const sortedTopThree = Object.entries(list)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3);
 
-    console.log(`1st place: ${sorted[0][0]}\n2nd place: ${sorted[1][0]}\n3rd place: ${sorted[2][0]}`)
+    console.log(`1st place: ${sortedTopThree[0][0]}\n2nd place: ${sortedTopThree[1][0]}\n3rd place: ${sortedTopThree[2][0]}`)
 }
+
+
+
+
+
+
+
 
 solve([
     'George, Peter, Bill, Tom',
