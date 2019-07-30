@@ -1,7 +1,7 @@
 function solve(input) {
     const list = {};
     const areas = {};
-    
+
     function add(name, food, area) {
         food = Number(food);
         if (!(name in list)) {
@@ -20,7 +20,7 @@ function solve(input) {
                 console.log(`${name} was successfully fed`)
             }
         }
-       
+
     }
 
     function sortedAnimals(list) {
@@ -44,6 +44,13 @@ function solve(input) {
         });
     }
 
+    function printAreas(areas) {
+        console.log(`Areas with hungry animals:`)
+        Object.entries(areas)
+            .sort((a, b) => b[1] - a[1])
+            .forEach(e => console.log(`${e[0]} : ${e[1]}`));
+    }
+
     for (const line of input) {
         if (line === 'Last Info') {
             break;
@@ -56,11 +63,8 @@ function solve(input) {
         }
     }
     printAnimals(sortedAnimals(list));
-    console.log(`Areas with hungry animals:`)
     countAreas(list);
-    Object.entries(areas)
-        .sort((a, b) => b[1] - a[1])
-        .forEach(e => console.log(`${e[0]} : ${e[1]}`));
+    printAreas(areas);
 }
 
 // solve([
@@ -77,13 +81,13 @@ function solve(input) {
 //     'Last Info']
 // );
 solve([
-'Add:Bonie:3490:RiverArea',
-'Add:Sam:5430:DeepWoodsArea',
-'Add:Bonie:200:RiverArea',
-'Add:Maya:4560:ByTheCreek',
-'Feed:Maya:2390:ByTheCreek',
-'Feed:Bonie:3500:RiverArea',
-'Feed:Johny:3400:WaterFall',
-'Feed:Sam:5500:DeepWoodsArea',
-'Last Info' ]
+    'Add:Bonie:3490:RiverArea',
+    'Add:Sam:5430:DeepWoodsArea',
+    'Add:Bonie:200:RiverArea',
+    'Add:Maya:4560:ByTheCreek',
+    'Feed:Maya:2390:ByTheCreek',
+    'Feed:Bonie:3500:RiverArea',
+    'Feed:Johny:3400:WaterFall',
+    'Feed:Sam:5500:DeepWoodsArea',
+    'Last Info']
 );
