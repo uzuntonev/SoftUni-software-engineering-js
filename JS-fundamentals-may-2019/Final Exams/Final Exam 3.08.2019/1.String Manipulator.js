@@ -7,17 +7,17 @@ function solve(input) {
     }
 
     const includes = (string) => {
-        if(text.includes(string)){
+        if (text.includes(string)) {
             console.log('True')
-        }else {
+        } else {
             console.log('False')
         }
     }
 
     const end = (string) => {
-        if(text.endsWith(string)){
+        if (text.endsWith(string)) {
             console.log('True')
-        }else {
+        } else {
             console.log('False')
         }
     }

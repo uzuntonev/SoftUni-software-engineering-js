@@ -5,7 +5,7 @@ function solve(input) {
         health = Number(health);
         energy = Number(energy);
         if (!(name in list)) {
-            list[name] = [health, energy]
+            list[name] = [health, energy];
         } else {
             list[name][0] += health;
         }
@@ -19,42 +19,44 @@ function solve(input) {
                 console.log(`${defenderName} was disqualified!`)
                 delete list[defenderName];
             }
-            if (list[attackerName][1] <= 0){
+            if (list[attackerName][1] <= 0) {
                 console.log(`${attackerName} was disqualified!`);
-                delete list[attackerName];   
+                delete list[attackerName];
             }
         }
     }
 
-    function deleteUser (username){
-if (username === 'All'){
-for (const key in list) {
-    if (list.hasOwnProperty(key)) {
-       delete list[key];
+    function deleteUser(username) {
+        if (username === 'All') {
+            for (const key in list) {
+                if (list.hasOwnProperty(key)) {
+                    delete list[key];
+                }
+            }
+        } else {
+            delete list[username];
+        }
     }
-}
-}else{
-    delete list[username];
-}
-    }
-
 
     for (let line of input) {
         let [command, name, healthOrSecondName, energyOrDamage] = line.split(':');
         if (command === 'Add') {
-            add(name,healthOrSecondName, energyOrDamage)
+            add(name, healthOrSecondName, energyOrDamage);
         } else if (command === 'Attack') {
-            attack(name, healthOrSecondName, energyOrDamage)
+            attack(name, healthOrSecondName, energyOrDamage);
         } else if (command === 'Delete') {
-            deleteUser(name)
+            deleteUser(name);
         }
     }
+
     let peopleCount = Object.entries(list).length;
-    console.log(`People count: ${peopleCount}`)
+
+    console.log(`People count: ${peopleCount}`);
+
     Object.entries(list)
-    .sort((a,b) => a[0].localeCompare(b[0]))
-    .sort((a,b) => b[1][0] - a[1][0])
-    .forEach(e => console.log(`${e[0]} - ${e[1][0]} - ${e[1][1]}`))
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .sort((a, b) => b[1][0] - a[1][0])
+        .forEach(e => console.log(`${e[0]} - ${e[1][0]} - ${e[1][1]}`))
 }
 
 // solve([
@@ -68,9 +70,9 @@ for (const key in list) {
 //     'Results']
 // );
 solve([
-'Add:Bonnie:3000:5',
-'Add:Johny:4000:10',
-'Delete:All',
-'Add:Bonnie:3333:3',
-'Results' ]
+    'Add:Bonnie:3000:5',
+    'Add:Johny:4000:10',
+    'Delete:All',
+    'Add:Bonnie:3333:3',
+    'Results']
 )
