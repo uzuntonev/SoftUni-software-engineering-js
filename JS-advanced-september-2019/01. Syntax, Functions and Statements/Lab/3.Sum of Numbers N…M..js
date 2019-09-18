@@ -12,12 +12,12 @@ function solve(n, m) {
 solve('-8', '20');
 
 
-function sum(n, m) {
-    if (n === m) {
-        return m;
-    } 
-    return n + sum(n + 1, m);
-}
+// function sum(n, m) {
+//     if (n === m) {
+//         return m;
+//     } 
+//     return n + sum(n + 1, m);
+// }
 
 
-console.log(sum(1, 3));
+// console.log(sum(1, 3));
