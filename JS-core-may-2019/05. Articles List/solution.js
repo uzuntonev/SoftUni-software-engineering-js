@@ -9,10 +9,11 @@ console.log(contentValue)
 
 		let article = document.createElement('article');
 		let title = document.createElement('h3');
+		let content = document.createElement('p');
+		
 		title.innerHTML = titleValue;
 		article.appendChild(title);
 
-		let content = document.createElement('p');
 		content.innerHTML = contentValue;
 		article.appendChild(content);
 		document.getElementById('articles').appendChild(article);
