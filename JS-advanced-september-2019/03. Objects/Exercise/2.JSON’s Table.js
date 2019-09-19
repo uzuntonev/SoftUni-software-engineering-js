@@ -1,10 +1,12 @@
 function solve(input) {
    
-    let html = '<table>\n';
-    for (const line of input) {
-        const data = JSON.parse(line);
-        html += ` <tr>\n  <td>${data.name}</td>\n  <td>${data.position}</td>\n  <td>${data.salary}</td>\n </tr>\n`;
-    }
+    let html = input
+        .map(e => JSON.parse(e))
+        .reduce((acc, curr) => {
+            acc += ` <tr>\n  <td>${curr.name}</td>\n  <td>${curr.position}</td>\n  <td>${curr.salary}</td>\n </tr>\n`;
+            return acc;
+        }, '<table>\n');
+
     html += '</table>';
     console.log(html);
 }

@@ -8,7 +8,7 @@ function solve(input) {
             set.add(word);
         }
     }
-    console.log([...set].join(', ')) 
+    console.log([ ...set ].join(', ')); 
 }
 
 solve([
@@ -18,4 +18,4 @@ solve([
     'Vestibulum ultrices ex massa, sit amet faucibus nunc aliquam ut.',
     'Morbi in ipsum varius, pharetra diam vel, mattis arcu.',
     'Integer ac turpis commodo, varius nulla sed, elementum lectus.',
-    'Vivamus turpis dui, malesuada ac turpis dapibus, congue egestas metus.']);
+    'Vivamus turpis dui, malesuada ac turpis dapibus, congue egestas metus.' ]);

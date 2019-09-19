@@ -1,3 +1,5 @@
+/* eslint-disable no-undefined */
+/* eslint-disable multiline-ternary */
 function solve(input) {
 
     class Hero {
@@ -8,25 +10,20 @@ function solve(input) {
         }
     }
 
-    const output = [];
-
-    for (const line of input) {
-        let [ name, level, items ] = line.split(' / ');
-        level = Number(level);
-        items === undefined
-            ? items = []
-            : items = items.split(', ');
-
-        const hero = new Hero(name, level, items);
-        // const obj = {
-        //     name: name,
-        //     level: level,
-        //     items: items
-        // };
-        output.push(hero);
-    }
-    console.log(JSON.stringify(output));
+    const output = input
+        .map(e => e.split(' / '))
+        .map(e => {
+            e[2] === undefined ? e[2] = [] : e[2] = e[2].split(', ');
+            return [ e[0], Number(e[1]), e[2] ];
+        })
+        .reduce((acc, curr) => {
+            const hero = new Hero(...curr);
+            acc.push(hero);
+            return acc;
+        },[]);
+    console.log(JSON.stringify(output)); 
 }
+
 
 solve([
     'Isacc / 25 / Apple, GravityGun',

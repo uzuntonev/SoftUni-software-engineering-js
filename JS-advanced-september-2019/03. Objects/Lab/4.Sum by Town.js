@@ -1,22 +1,22 @@
 function solve(input) {
     const obj = {};
     for (let i = 0; i < input.length; i += 2) {
-        if (!(input[i] in obj)) {
-            obj[input[i]] = Number(input[i + 1]);
+        const key = input[i];
+        const value = input[i + 1];
+        if (!(key in obj)) {
+            obj[key] = Number(value);
         } else {
-            obj[input[i]] += Number(input[i + 1]);
+            obj[key] += Number(value);
         }
-
     }
-    console.log(JSON.stringify(obj))
+    console.log(JSON.stringify(obj));
 }
 
-solve(['Sofia',
+solve([ 'Sofia',
     '20',
     'Varna',
     '3',
     'Sofia',
     '5',
     'Varna',
-    '4']
-);
+    '4' ]);

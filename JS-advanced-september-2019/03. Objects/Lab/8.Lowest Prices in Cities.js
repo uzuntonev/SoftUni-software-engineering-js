@@ -1,7 +1,7 @@
 function solve(input) {
     const obj = {};
     for (const line of input) {
-        let [town, product, price] = line.split(' | ');
+        let [ town, product, price ] = line.split(' | ');
         price = Number(price);
 
         if (!(product in obj)) {
@@ -11,12 +11,12 @@ function solve(input) {
         }
     }
 
-   const products = Object.entries(obj);
+    const products = Object.entries(obj);
 
-   for (const [key, value] of products) {
-      let lowest = Object.entries(value).sort((a, b) => a[1] - b[1])[0];
-      console.log(`${key} -> ${lowest[1]} (${lowest[0]})`) 
-   }
+    for (const [ key, value ] of products) {
+        const lowest = Object.entries(value).sort((a, b) => a[1] - b[1])[0];
+        console.log(`${key} -> ${lowest[1]} (${lowest[0]})`); 
+    }
 }
 
 
@@ -27,4 +27,4 @@ solve([
     'Sofia | Orange | 3',
     'Sofia | Peach | 2',
     'New York | Sample Product | 1000.1',
-    'New York | Burger | 10']);
+    'New York | Burger | 10' ]);

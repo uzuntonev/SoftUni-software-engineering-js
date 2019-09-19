@@ -4,14 +4,13 @@ function solve(input) {
     const obj = {};
     for (const element of words) {
         if (!(element in obj)) {
-            obj[element] = 1;
-        }else {
-            obj[element]++
+            obj[element] = 0;
         }
+        obj[element]++;
     }
-    console.log(JSON.stringify(obj)) 
+    console.log(JSON.stringify(obj)); 
 }
 
 
 
-solve(["Far too slow, you're far too slow."]);
+solve([ 'Far too slow, you\'re far too slow.' ]);
