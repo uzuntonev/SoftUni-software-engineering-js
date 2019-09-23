@@ -1,12 +1,13 @@
 /* eslint-disable no-undefined */
 /* eslint-disable multiline-ternary */
 function solve(input) {
-
     class Hero {
         constructor(name, level, items) {
             this.name = name,
             this.level = level,
             this.items = items;
+            // this.level = Number(level),
+            // this.items = items === undefined ? [] : items.split(', ');
         }
     }
 
@@ -20,8 +21,8 @@ function solve(input) {
             const hero = new Hero(...curr);
             acc.push(hero);
             return acc;
-        },[]);
-    console.log(JSON.stringify(output)); 
+        }, []);
+    console.log(JSON.stringify(output));
 }
 
 

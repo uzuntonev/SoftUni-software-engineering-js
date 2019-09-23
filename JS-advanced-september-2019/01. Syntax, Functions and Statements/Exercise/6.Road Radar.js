@@ -1,6 +1,6 @@
 function solve(arr) {
     const [ speed, area ] = arr;
-    const areaSpeedLimit = {
+    const speedLimit = {
         motorway: 130,
         interstate: 90,
         city: 50,
@@ -8,12 +8,12 @@ function solve(arr) {
     };
 
     function speedAlert(value) {
-        if (value - areaSpeedLimit[area] <= 0) {
+        if (value - speedLimit[area] <= 0) {
             return '';
         }
-        if ((value - areaSpeedLimit[area]) <= 20) {
+        if ((value - speedLimit[area]) <= 20) {
             return 'speeding';
-        } else if (((value - areaSpeedLimit[area]) <= 40)) {
+        } else if (((value - speedLimit[area]) <= 40)) {
             return 'excessive speeding';
         } 
         return 'reckless driving';
@@ -30,4 +30,4 @@ function solve(arr) {
     console.log(processing[area]);
 }
 
-solve([ 40, 'city' ]);
+solve([ 60, 'city' ]);

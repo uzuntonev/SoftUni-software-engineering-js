@@ -18,7 +18,7 @@ function solve(input) {
             return acc;
         }, {}));
 
-    console.log(JSON.stringify(output)); 
+    return JSON.stringify(output); 
 }
 
 console.log(solve([
@@ -53,3 +53,4 @@ console.log(solve([
 //     }
 //     console.log(JSON.stringify(output))
 // }
+

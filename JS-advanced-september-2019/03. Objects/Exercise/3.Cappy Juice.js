@@ -1,24 +1,25 @@
 function solve(input) {
     const obj = {};
-    const output = {};
+    const bottles = {};
+    const makeBottle = (data) => data >= 1000 ? Math.trunc(data / 1000) : void (0);
+
     for (const line of input) {
-        let [ juice, quanity ] = line.split(' => ');
-        quanity = Number(quanity);
+        let [ juice, quantity ] = line.split(' => ');
+        quantity = Number(quantity);
         if (!(juice in obj)) {
-            obj[juice] = quanity;
+            obj[juice] = quantity;
         } else {
-            obj[juice] += quanity;
+            obj[juice] += quantity;
         }
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                if (obj[key] >= 1000) {
-                    output[key] = parseInt(obj[key] / 1000);
-                }
-            }
+        if (obj[juice] >= 1000) {
+            bottles[juice] = makeBottle(obj[juice]);
         }
     }
-
-    Object.entries(output).forEach(e => console.log(`${e[0]} => ${parseInt(e[1])}`));
+    for (const bottle in bottles) {
+        if (bottles.hasOwnProperty(bottle)) {
+            console.log(`${bottle} => ${bottles[bottle]}`); 
+        }
+    }
 }
 
 // solve([
@@ -26,7 +27,7 @@ function solve(input) {
 //     'Peach => 1432',
 //     'Banana => 450',
 //     'Peach => 600',
-//     'Strawberry => 549']);
+//     'Strawberry => 549' ]);
 
 solve([ 'Kiwi => 234',
     'Pear => 2345',
