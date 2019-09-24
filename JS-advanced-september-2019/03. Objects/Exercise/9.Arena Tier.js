@@ -55,6 +55,7 @@ function solve(input) {
                 return acc;
             }, obj);
     }
+    
     function sortAndPrint(obj){
         return Object.entries(obj)
             .sort((a, b) => a[0].localeCompare(b[0]))

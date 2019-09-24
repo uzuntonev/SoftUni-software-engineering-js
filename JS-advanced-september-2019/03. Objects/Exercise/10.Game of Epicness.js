@@ -2,12 +2,12 @@ function solve(kingdomsArr, battles) {
     const listOfKingdoms = {};
 
     for (const line of kingdomsArr) {
-        let { kingdom, general, army } = line;
+        const { kingdom, general, army } = line;
         if (!(kingdom in listOfKingdoms)) {
             listOfKingdoms[kingdom] = {
                 [general]: { army, wins: 0, losses: 0 },
                 totalWins: 0,
-                totalLosses: 0
+                totalLosses: 0,
             };
         } else {
             if (listOfKingdoms[kingdom][general]) {
@@ -19,12 +19,12 @@ function solve(kingdomsArr, battles) {
     }
 
     for (const line of battles) {
-        let [attackingKingdom, attackingGeneral, defendingKingdom, defendingGeneral] = line;
-        let attacking = listOfKingdoms[attackingKingdom][attackingGeneral];
-        let defending = listOfKingdoms[defendingKingdom][defendingGeneral];
+        const [ attackingKingdom, attackingGeneral, defendingKingdom, defendingGeneral ] = line;
+        const attacking = listOfKingdoms[attackingKingdom][attackingGeneral];
+        const defending = listOfKingdoms[defendingKingdom][defendingGeneral];
 
-        if (attackingKingdom != defendingKingdom
-            && attacking.army != defending.army) {
+        if (attackingKingdom != defendingKingdom &&
+            attacking.army != defending.army) {
             if (attacking.army > defending.army) {
                 attacking.army = Math.floor(listOfKingdoms[attackingKingdom][attackingGeneral].army * 1.1);
                 defending.army = Math.floor(listOfKingdoms[defendingKingdom][defendingGeneral].army * 0.9);
@@ -45,30 +45,32 @@ function solve(kingdomsArr, battles) {
 
     }
 
-    let sortedKingdoms = Object.entries(listOfKingdoms)
+    const sortedKingdoms = Object.entries(listOfKingdoms)
         .sort((a, b) => a[0].localeCompare(b[0]))
         .sort((a, b) => a[1].totalLosses - b[1].totalLosses)
         .sort((a, b) => b[1].totalWins - a[1].totalWins);
 
-    let winner = sortedKingdoms[0];
+    const winner = sortedKingdoms[0];
     delete winner[1].totalWins;
     delete winner[1].totalLosses;
     console.log(`Winner: ${winner[0]}`);
 
-    let a = Object.entries(winner[1])
+    const a = Object.entries(winner[1])
         .sort((a, b) => b[1].army - a[1].army)
-        .forEach(e => console.log(`/\\general: ${e[0]}\n---army: ${e[1].army}\n---wins: ${e[1].wins}\n---losses: ${e[1].losses}`))
+        .forEach(e => console.log(`/\\general: ${e[0]}\n---army: ${e[1].army}\n---wins: ${e[1].wins}\n---losses: ${e[1].losses}`));
 
 
     // console.log(a)
 }
 
-solve([
-    { kingdom: "Stonegate", general: "Ulric", army: 5000 },
-    { kingdom: "YorkenShire", general: "Quinn", army: 5000 },
-    { kingdom: "Maiden Way", general: "Berinon", army: 1000 }],
-    [["YorkenShire", "Quinn", "Stonegate", "Ulric"],
-    ["Maiden Way", "Berinon", "YorkenShire", "Quinn"]]);
+solve(
+[
+    { kingdom: 'Stonegate', general: 'Ulric', army: 5000 },
+    { kingdom: 'YorkenShire', general: 'Quinn', army: 5000 },
+    { kingdom: 'Maiden Way', general: 'Berinon', army: 1000 } ],
+[ [ 'YorkenShire', 'Quinn', 'Stonegate', 'Ulric' ],
+    [ 'Maiden Way', 'Berinon', 'YorkenShire', 'Quinn' ] ]
+);
 
 // solve([{ kingdom: "Maiden Way", general: "Merek", army: 5000 },
 // { kingdom: "Stonegate", general: "Ulric", army: 4900 },

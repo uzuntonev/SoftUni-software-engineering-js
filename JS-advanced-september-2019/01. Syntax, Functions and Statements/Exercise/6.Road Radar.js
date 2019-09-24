@@ -17,17 +17,8 @@ function solve(arr) {
             return 'excessive speeding';
         } 
         return 'reckless driving';
-        
     }
-
-    const processing = {
-        motorway: speedAlert(speed),
-        interstate: speedAlert(speed),
-        city: speedAlert(speed),
-        residential: speedAlert(speed),
-    };
-
-    console.log(processing[area]);
+    console.log(speedAlert(speed));
 }
 
 solve([ 60, 'city' ]);

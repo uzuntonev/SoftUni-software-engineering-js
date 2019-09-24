@@ -1,6 +1,4 @@
 function solve(input) {
-    const list = [];
-
     function compare(firstArr, secondArr) {
         if (firstArr.length !== secondArr.length) {
             return false;
@@ -12,11 +10,8 @@ function solve(input) {
         }
         return true; 
     }
-    
-    for (const line of input) {
-        const array = JSON.parse(line).map(Number).sort((a, b) => b - a);
-        list.push(array);
-    }
+
+    const list = input.map(e => JSON.parse(e).sort((a, b) => b -a));
 
     for (let i = 0; i < list.length; i++) {
         for (let j = i + 1; j < list.length; j++) {
@@ -29,7 +24,6 @@ function solve(input) {
 
     list.sort((a, b) => a.length - b.length)
         .forEach(e => console.log(`[${e.join(', ')}]`));
-
 }
 
 
