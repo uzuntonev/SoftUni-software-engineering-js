@@ -1,7 +1,7 @@
 function solve(input) {
-    let step = Number(input.pop());
+    const step = Number(input.pop());
     for (let i = 0; i < input.length; i+=step) {
-        console.log(input[i]) 
+        console.log(input[i]); 
     }
 }
 
@@ -11,4 +11,4 @@ solve([
     '31',
     '4',
     '20',
-    '2']);
+    '2' ]);

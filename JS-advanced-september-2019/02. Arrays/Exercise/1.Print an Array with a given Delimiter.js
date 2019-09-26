@@ -1,13 +1,13 @@
 function solve(input) {
-    let delimiter = input.pop();
-    let output = input.join(delimiter);
-    console.log(output) 
+    return input
+        .slice(0, -1)
+        .join(input[input.length - 1]);
 }
 
-solve([
+console.log(solve([
     'One',
     'Two',
     'Three',
     'Four',
     'Five',
-    '-']);
+    '-' ]));

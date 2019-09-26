@@ -1,9 +1,8 @@
 function solve(input) {
-    const output = input
+    return input
         .sort((a, b) => a - b)
         .splice(0, 2)
         .join(' ');
-    console.log(output)
 }
 
-solve([30, 15, 50, 5]);
+console.log(solve([ 30, 15, 50, 5 ]));

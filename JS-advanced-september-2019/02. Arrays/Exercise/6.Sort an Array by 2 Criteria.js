@@ -1,18 +1,17 @@
 function solve(input) {
-    let sorted = input
+    return input
         .sort((a, b) => a.localeCompare(b))
-        .sort((a, b) => a.length - b.length);
-    sorted.forEach(e => console.log(e) );
+        .sort((a, b) => a.length - b.length)
+        .join('\n'); 
 }
 
-solve([
+console.log(solve([
     'alpha',
     'beta',
-    'gamma']
-);
+    'gamma' ]));
 solve([
     'Isacc',
     'Theodor',
     'Jack',
     'Harrison',
-    'George']);
+    'George' ]);

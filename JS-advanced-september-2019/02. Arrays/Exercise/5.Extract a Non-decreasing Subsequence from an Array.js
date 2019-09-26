@@ -4,13 +4,13 @@ function solve(input) {
     for (let i = 0; i < input.length; i++) {
         if (input[i] >= biggestNum) {
             biggestNum = input[i];
-            arr.push(biggestNum)
+            arr.push(biggestNum);
         }
     }
-    arr.forEach(e => console.log(e) )
+    return arr.join('\n');
 }
 
-solve([
+console.log(solve([
     1,
     3,
     8,
@@ -19,7 +19,7 @@ solve([
     12,
     3,
     2,
-    24]);
+    24 ]));
 
 solve([
     20,
@@ -27,4 +27,4 @@ solve([
     2,
     15,
     6,
-    1]);
+    1 ]);

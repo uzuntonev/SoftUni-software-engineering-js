@@ -1,9 +1,9 @@
 function solve(input) {
     const output = [];
-    for (let i = 0; i < input.length; i++) {
-        i % 2 == 0 ? output.push(input[i]) : void(0);
+    for (let i = 0; i < input.length; i+=2) {
+        output.push(input[i]);
     }
-    console.log(output.join(' ')) 
+    console.log(output.join(' ')); 
 }
 
-solve(['20', '30', '40']);
+solve([ '20', '30', '40' ]);

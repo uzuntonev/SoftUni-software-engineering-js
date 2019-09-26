@@ -1,9 +1,9 @@
 function solve(input) {
-    let rotation = Number(input.pop())
+    const rotation = Number(input.pop());
     for (let i = 0; i < rotation; i++) {
         input.unshift(input.pop());
     }
-    console.log(input.join(' '))
+    return input.join(' ');
 }
 
 solve([
@@ -11,10 +11,10 @@ solve([
     '2',
     '3',
     '4',
-    '2']);
+    '2' ]);
 solve([
     'Banana',
     'Orange',
     'Coconut',
     'Apple',
-    '15']);
+    '15' ]);

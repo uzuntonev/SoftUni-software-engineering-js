@@ -1,9 +1,13 @@
 function solve(input) {
+    const methods = {
+        true: 'push',
+        false: 'unshift',
+    };
     const output = [];
-    for (const element of input) {
-        element >= 0 ? output.push(element) : output.unshift(element);
-    }
-    console.log(output) 
+    input.forEach(e => {
+        output[methods[e >= 0]](e);
+    });
+    return output;
 }
 
-solve([3, -2, 0, -1]);
+console.log(solve([ 3, -2, 0, -1 ]));
