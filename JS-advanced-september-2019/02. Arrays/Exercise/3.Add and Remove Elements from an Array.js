@@ -1,4 +1,17 @@
 function solve(input) {
+    const methods = {
+        counter: 1,
+        add: 'push',
+        remove: 'pop',
+    };
+    return input.reduce((acc, curr) => {
+        acc[methods[curr]](methods.counter++);
+        return acc;
+    }, [])
+        .join('\n') || 'Empty'; 
+}
+
+function solve2(input) {
     let init = 0;
     const arr = [];
 
@@ -20,11 +33,11 @@ function solve(input) {
         : 'Empty';
 }
 
-console.log(solve([
-    'add',
-    'add',
-    'add',
-    'add' ]));
+// console.log(solve([
+//     'add',
+//     'add',
+//     'add',
+//     'add' ]));
 
 // solve([ 'add', 
 //     'add', 
@@ -32,7 +45,7 @@ console.log(solve([
 //     'add', 
 //     'add' ]);
 
-solve([
+console.log(solve([
     'remove',
     'remove',
-    'remove' ]);
+    'remove' ]));

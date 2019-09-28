@@ -1,17 +1,25 @@
 function solve(input) {
-    const rotation = Number(input.pop());
-    for (let i = 0; i < rotation; i++) {
-        input.unshift(input.pop());
-    }
-    return input.join(' ');
+    let rotation = Number(input.pop()) % input.length;
+    // for (let i = 0; i < rotation; i++) {
+    //     input.unshift(input.pop());
+    // }
+    // return input.join(' ');
+
+    return input.reduceRight((acc, curr)=>{
+        if(rotation){
+            acc = [ curr, ...acc.slice(0, acc.length - 1) ];
+            rotation--;
+        }
+        return acc;
+    },[ ...input ]).join(' ');
 }
 
-solve([
+console.log(solve([
     '1',
     '2',
     '3',
     '4',
-    '2' ]);
+    '2' ]));
 solve([
     'Banana',
     'Orange',

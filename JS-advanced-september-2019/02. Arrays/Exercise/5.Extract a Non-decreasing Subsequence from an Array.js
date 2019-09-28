@@ -1,4 +1,15 @@
 function solve(input) {
+    return input.reduce((acc, curr) => {
+        if (curr >= Math.max(...acc)){
+            acc.push(curr);
+        }
+        return acc;
+    }, [])
+        .join('\n');
+}
+
+
+function solve2(input) {
     let biggestNum = input[0];
     const arr = [];
     for (let i = 0; i < input.length; i++) {
@@ -9,7 +20,6 @@ function solve(input) {
     }
     return arr.join('\n');
 }
-
 console.log(solve([
     1,
     3,

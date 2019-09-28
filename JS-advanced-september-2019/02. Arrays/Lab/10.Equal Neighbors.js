@@ -1,4 +1,15 @@
 function solve(input) {
+    let result = 0;
+    for (let i = 0; i < input.length - 1; i++) {
+        result += input[i].filter((el, index) => el === input[i + 1][index]).length;
+    }
+    for (let i = 0; i < input.length; i++) {
+        result += input[i].filter((el, index, arr) => el === arr[index + 1]).length;
+    }
+    return result;
+}
+
+function solve2(params) {
     let counter = 0;
     for (let i = 0; i < input.length; i++) {
         const current = input[i];
@@ -10,7 +21,7 @@ function solve(input) {
             }
         }
     }
-    
+
     for (let i = 0; i < input.length; i++) {
         const current = input[i];
         for (let j = 0; j < current.length; j++) {
@@ -22,18 +33,19 @@ function solve(input) {
     console.log(counter);
 }
 
-solve([
-    [ '2', '3', '4', '7', '0' ],
-    [ '4', '0', '5', '3', '4' ],
-    [ '2', '3', '5', '4', '2' ],
-    [ '9', '8', '7', '5', '4' ],
-]);
+
+// console.log(solve([
+//     [ '2', '3', '4', '7', '0' ],
+//     [ '4', '0', '5', '3', '4' ],
+//     [ '2', '3', '5', '4', '2' ],
+//     [ '9', '8', '7', '5', '4' ],
+// ]));
 // solve([
 //     [ 'test', 'yes', 'yo', 'ho' ],
 //     [ 'well', 'done', 'yo', '6' ],
 //     [ 'not', 'done', 'yet', '5' ],
 // ]);
-// solve([ 
-//     [ '2', '2', '5', '7', '4' ],
-//     [ '4', '0', '5', '3', '4' ],
-//     [ '2', '5', '5', '4', '2' ] ]);
+console.log(solve([
+    [ '2', '2', '5', '7', '4' ],
+    [ '4', '0', '5', '3', '4' ],
+    [ '2', '5', '5', '4', '2' ] ]));
