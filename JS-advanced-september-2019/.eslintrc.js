@@ -76,7 +76,7 @@ module.exports = {
         "no-shadow": "error", // disallow declaration of variables already declared in the outer scope
         "no-shadow-restricted-names": "error", // disallow shadowing of names such as arguments
         "no-sparse-arrays": "error", // disallow sparse arrays
-        "no-undef": "error", // disallow undeclared variables
+        "no-undef": "off", // disallow undeclared variables
         "no-undef-init": "error", // disallow use of undefined when initializing variables
         "no-undefined": "error", // disallow use of undefined variable (off by default)
         "no-underscore-dangle": ["error", { allowAfterThis: true, allowAfterSuper: true }], // dissalow the usage of _ af both ends of an object name, except with class/object functions
