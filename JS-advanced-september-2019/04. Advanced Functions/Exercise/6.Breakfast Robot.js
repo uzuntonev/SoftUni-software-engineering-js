@@ -46,7 +46,6 @@ function solve() {
                     .join(' ');
             }
         }
-        console.log(output);
         return output;
     };
 }

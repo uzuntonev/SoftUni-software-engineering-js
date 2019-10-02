@@ -1,18 +1,13 @@
-function solve() {
-    return (function test() {
-        let sum = 0;
-        return function add(n) {
-            sum += n;
-            add.toString = () => sum;
-            return add;
-        };
-    })();
-}
+const solution = (function test() {
+    let sum = 0;
+    return function add(n) {
+        sum += n;
+        add.toString = () => sum;
+        return add;
+    };
+}());
 
-solve();
-
-const a = solve();
-console.log(a(1)(2)(3).toString()); 
+console.log(solution(1)(2)(3).toString()); 
 
 // function solve(input) {
 //     let result = input;
