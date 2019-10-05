@@ -1,3 +1,8 @@
 function notify(message) {
-    console.log('TODO:...');
+    const notifyField = document.querySelector('#notification');
+    notifyField.innerHTML = message;
+    notifyField.style.display = 'block';
+    setTimeout(()=>{
+        notifyField.style.display = 'none';
+    },2000);
 }

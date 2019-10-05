@@ -9,3 +9,13 @@ function solve() {
         curr.textContent = arr.join(' ');
     }
 }
+
+
+
+
+// const textFormater = x => `visited ${x} times`;
+// document.addEventListener('click', (ev) => {
+//     const curr = ev.target.parentNode.querySelector('p');
+//     let count = Number(curr.innerHTML.split(' ')[1]);
+//     curr.innerHTML = textFormater(++count);
+// }, true);

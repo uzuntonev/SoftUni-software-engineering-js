@@ -6,6 +6,9 @@ html, body {
     font-family: Lato;
     color: white;
 }
+* {
+    pointer-events: none;
+}
 
 #page1 { background: #2d2d2d; }
 
@@ -45,6 +48,10 @@ p {
 [class^="link-"] {
     display: inline-block;
     margin: 2em
+}
+[class^="link-"] a {
+    pointer-events: all;
+
 }
 
 /* linkone */

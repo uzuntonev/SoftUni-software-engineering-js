@@ -1,7 +1,7 @@
 function solve() {
-    const name = document.querySelector('#exercise input');
-    const list = document.querySelectorAll('ol li');
     document.querySelector('#exercise button').addEventListener('click', () => {
+        const name = document.querySelector('#exercise input');
+        const list = document.querySelectorAll('ol li');
         const char = name.value
             .toUpperCase()[0];
         const index = char

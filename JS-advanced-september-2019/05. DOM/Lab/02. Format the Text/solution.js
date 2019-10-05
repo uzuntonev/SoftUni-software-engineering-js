@@ -16,5 +16,5 @@ function solve() {
         const curr = data.splice(0, 3).join('. ');
         sentences.push(curr);
     }
-    sentences.forEach(e => output.innerHTML += `<p> ${e} </p>`);
+    output.innerHTML = sentences.map(e => `<p>${e}</p>`).join('');
 }
