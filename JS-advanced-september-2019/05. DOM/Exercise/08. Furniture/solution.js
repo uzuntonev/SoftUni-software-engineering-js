@@ -1,68 +1,75 @@
 function solve() {
-    const bought = [];
-    let total = 0;
-    let decFact = 0;
-
-    const output = document.querySelectorAll('textarea')[1];
+    const data = {
+        cart: [],
+        total: 0,
+        decFact: 0,
+    };
     document.querySelector('tbody tr input').disabled = false;
+
+    function createElement(type, content, attr) {
+        const el = document.createElement(type);
+        if (content) {
+            el.innerHTML = content;
+        }
+        if (attr) {
+            el[attr.name] = attr.value;
+        }
+        return el;
+    }
+
+    function append(parent, child){
+        return parent.appendChild(child);
+    }
 
     function createRow(el) {
 
         const tr = document.createElement('tr');
-        const img = document.createElement('img');
-        const pName = document.createElement('p');
-        const pPrice = document.createElement('p');
-        const pDecFactor = document.createElement('p');
-        const input = document.createElement('input');
-        input.type = 'checkbox';
-    
-        img.src = el.img;
-        pName.innerHTML = el.name;
-        pPrice.innerHTML = el.price;
-        pDecFactor.innerHTML = el.decFactor;
-        tr
-            .appendChild(document.createElement('td'))
-            .appendChild(img);
-        tr
-            .appendChild(document.createElement('td'))
-            .appendChild(pName);
-        tr
-            .appendChild(document.createElement('td'))
-            .appendChild(pPrice);
-        tr
-            .appendChild(document.createElement('td'))
-            .appendChild(pDecFactor);
-        tr
-            .appendChild(document.createElement('td'))
-            .appendChild(input);
-        document.querySelector('tbody').appendChild(tr);
+        const img = createElement('img', undefined, { name: 'src', value: el.img });
+        const name = createElement('p', el.name);
+        const price = createElement('p', el.price);
+        const decFactor = createElement('p', el.decFactor);
+        const input = createElement('input', undefined, { name: 'type', value: 'checkbox' });
+        
+        append(tr, createElement('td')).appendChild(img);
+        append(tr, createElement('td')).appendChild(name);
+        append(tr, createElement('td')).appendChild(price);
+        append(tr, createElement('td')).appendChild(decFactor);
+        append(tr, createElement('td')).appendChild(input);
+        append(document.querySelector('tbody'), tr);
     }
 
-    function buy(el) {
-        const name = el.querySelectorAll('p')[0];
-        const price = el.querySelectorAll('p')[1];
-        const decFactor = el.querySelectorAll('p')[2];
-        bought.push(name.innerHTML);
-        total += Number(price.innerHTML);
-        decFact += Number(decFactor.innerHTML);
+    function buy(el, data) {
+        const [ name, price, decFactor ] = [ ...el.querySelectorAll('p') ];
+        data.cart.push(name.innerHTML);
+        data.total += Number(price.innerHTML);
+        data.decFact += Number(decFactor.innerHTML);
     }
 
-    document.querySelectorAll('button')[0].addEventListener('click', () => {
+    function checkOut(data) {
+        const output = document.querySelectorAll('textarea')[1];
+        output.value = '';
+        output.value = `Bought furniture: ${data.cart.join(', ')}
+Total price: ${data.total.toFixed(2)}
+Average decoration factor: ${data.decFact / data.cart.length}`;
+    }
+
+    function handlerGenerate() {
         const value = JSON.parse(document.querySelectorAll('textarea')[0].value);
         value.forEach(e => {
             createRow(e);
         });
-    });
+    }
 
-    document.querySelectorAll('button')[1].addEventListener('click', () => {
+    function handlerCheckOut() {
         [ ...document.querySelectorAll('tbody tr input') ].forEach(e => {
             if (e.checked) {
-                buy(e.parentElement.parentElement);
+                buy(e.parentElement.parentElement, data);
                 e.checked = false;
             }
         });
-        output.value += `Bought furniture: ${bought.join(', ')}\n`; 
-        output.value += `Total price: ${total.toFixed(2)}\n`; 
-        output.value += `Average decoration factor: ${decFact / bought.length}`; 
-    });
+        checkOut(data);
+    }
+
+    document.querySelectorAll('button')[0].addEventListener('click', handlerGenerate);
+    document.querySelectorAll('button')[1].addEventListener('click', handlerCheckOut);
 }

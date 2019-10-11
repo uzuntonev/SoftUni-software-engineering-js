@@ -1,12 +1,13 @@
 function solve() {
     const patternExp = /[\d.]+ [+\-*\/] [\d.]+/g;
-    const patternDel = /[+\-*\/]/g;
+    const patternDelimiter = /[+\-*\/]/g;
+    const operators = [ '+', '-', '*', '/' ];
     
     const input = document.querySelector('#expressionOutput');
     const output = document.querySelector('#resultOutput');
 
     function calculate(string) {
-        const delimiter = string.match(patternDel);
+        const delimiter = string.match(patternDelimiter);
         const [ a, b ] = string
             .split(delimiter);
         const calc = {
@@ -18,10 +19,8 @@ function solve() {
         return calc[delimiter](Number(a), Number(b));
     }
 
-    const operators = [ '+', '-', '*', '/' ];
-
-    [ ...document.querySelectorAll('button') ]
-        .forEach(e => e.addEventListener('click', (ev) => {
+    function handler(ev) {
+        if (ev.target.nodeName === 'BUTTON'){
             if (ev.target.value === 'Clear') {
                 input.innerHTML = '';
                 output.innerHTML = '';
@@ -36,5 +35,8 @@ function solve() {
                     ? ' ' + ev.target.value + ' '
                     : ev.target.value;
             }
-        }));
+        }
+    }
+
+    document.addEventListener('click', handler);
 }
