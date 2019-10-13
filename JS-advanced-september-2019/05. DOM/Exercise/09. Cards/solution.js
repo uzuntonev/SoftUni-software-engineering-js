@@ -2,31 +2,48 @@ function solve() {
     const history = document.querySelector('#history');
     const spanL = document.querySelector('#result').firstElementChild;
     const spanR = document.querySelector('#result').lastElementChild;
-    let first;
-    let second;
+    let firstCard;
+    let secondCard;
 
-    [ ...document.querySelectorAll('img') ].forEach(e => e.addEventListener('click', (ev) => {
+    const playerIDs = {
+        player1Div: (target) => {
+            spanL.innerHTML = target.name;
+            firstCard = target;
+        },
+        player2Div: (target) => {
+            spanR.innerHTML = target.name;
+            secondCard = target;
+        },
+    };
+
+    function battle(a, b) {
+        if (Number(a.name) > Number(b.name)) {
+            return [ a, b ];
+        }
+        return [ b, a ];
+    }
+
+    function setBorder(a, b) {
+        a.style.border = '2px solid green';
+        b.style.border = '2px solid red';
+    }
+
+    function addToHistory(firstCard, secondCard){
+        history.innerHTML += `[${firstCard.name} vs ${secondCard.name}] `;
+        spanR.innerHTML = '';
+        spanL.innerHTML = '';
+    }
+
+    function handler(ev) {
         ev.target.src = 'images/whiteCard.jpg';
-        if (ev.target.parentElement.id === 'player1Div'){
-            spanL.innerHTML = ev.target.name;
-            first = ev.target;
-        }else if (ev.target.parentElement.id === 'player2Div'){
-            spanR.innerHTML = ev.target.name;
-            second = ev.target;
-        }
+        playerIDs[ev.target.parentElement.id](ev.target);
 
-        if (spanR.innerHTML !=='' && spanL.innerHTML !== ''){
-            if (Number(first.name) > Number(second.name)){
-                first.style.border = '2px solid green';
-                second.style.border = '2px solid red';
-
-            }else {
-                second.style.border = '2px solid green';
-                first.style.border = '2px solid red';
-            }
-            history.innerHTML += `[${first.name} vs ${second.name}] `;
-            spanR.innerHTML = '';
-            spanL.innerHTML = '';
+        if (spanR.innerHTML !== '' && spanL.innerHTML !== '') {
+            setBorder(...battle(firstCard, secondCard));
+            addToHistory(firstCard, secondCard);
         }
-    }));
+        
+    }
+
+    document.addEventListener('click', handler);
 }
