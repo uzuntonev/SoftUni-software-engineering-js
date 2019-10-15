@@ -4,21 +4,18 @@ function encodeAndDecodeMessages() {
     const sendArea = encodeBtn.parentNode.querySelector('textarea');
     const receiveArea = decodeBtn.parentNode.querySelector('textarea');
 
-    function encode() {
-        receiveArea.value = sendArea.value
+    function handler(ev) {
+        const { content, mapChar } = ev.target.innerHTML.includes('Encode')
+            ? { content: sendArea.value, mapChar: x => x.charCodeAt() + 1 }
+            : { content: receiveArea.value, mapChar: x => x.charCodeAt() - 1 };
+
+        receiveArea.value = content
             .split('')
-            .map(char => char.charCodeAt() + 1)
+            .map(char => mapChar(char))
             .map(ascii => String.fromCharCode(ascii))
             .join('');
         sendArea.value = '';
     }
-    function decode() {
-        receiveArea.value = receiveArea.value
-            .split('')
-            .map(char => char.charCodeAt() - 1)
-            .map(ascii => String.fromCharCode(ascii))
-            .join('');
-    }
-    encodeBtn.addEventListener('click', encode);
-    decodeBtn.addEventListener('click', decode);
+
+    document.addEventListener('click', handler);
 }
