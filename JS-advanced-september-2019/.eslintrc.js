@@ -78,7 +78,7 @@ module.exports = {
         "no-sparse-arrays": "error", // disallow sparse arrays
         "no-undef": "off", // disallow undeclared variables
         "no-undef-init": "error", // disallow use of undefined when initializing variables
-        "no-undefined": "error", // disallow use of undefined variable (off by default)
+        "no-undefined": "off", // disallow use of undefined variable (off by default)
         "no-underscore-dangle": ["error", { allowAfterThis: true, allowAfterSuper: true }], // dissalow the usage of _ af both ends of an object name, except with class/object functions
         "no-unreachable": "error", // disallow unreachable statements after a return, throw, continue, or break statement
         "no-unused-expressions": "off", // disallow usage of expressions in statement position

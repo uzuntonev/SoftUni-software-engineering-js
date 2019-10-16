@@ -15,7 +15,7 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test/Exercise-test/${fileBasenameNoExtension}.test.js"
+        "'${workspaceFolder}/test/Exercise-test/${fileBasenameNoExtension}.js'"
       ],
       "internalConsoleOptions": "openOnSessionStart"
     },
@@ -30,7 +30,7 @@
           "--timeout",
           "999999",
           "--colors",
-          "'${workspaceFolder}/test/Lab-test/*.test.js'"
+          "'${workspaceFolder}/test/Exercise-test/*.test.js'"
         ],
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
@@ -46,7 +46,7 @@
           "--timeout",
           "999999",
           "--colors",
-          "'${workspaceFolder}/test/Lab-test/${fileBasenameNoExtension}.test.js'"
+          "'${workspaceFolder}/test/Exercise-test/${fileBasenameNoExtension}.test.js'"
         ],
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
