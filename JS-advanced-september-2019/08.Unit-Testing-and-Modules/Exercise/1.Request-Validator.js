@@ -46,3 +46,5 @@ console.log(reqValidator({
     version: 'HTTP/2.0',
     message: 'rm -rf /*',
 }));
+
+// 88/100 Judge !!!
