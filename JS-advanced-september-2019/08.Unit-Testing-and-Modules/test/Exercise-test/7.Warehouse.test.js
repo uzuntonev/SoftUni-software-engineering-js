@@ -1,8 +1,5 @@
 const { assert } = require('chai');
 const Warehouse = require('../../Exercise/7.Warehouse');
-const { expect } = require('chai');
-
-
 
 describe('', () => {
     let instance;
@@ -13,6 +10,10 @@ describe('', () => {
         assert.equal(instance.revision(), 'The warehouse is empty');
     }); //OK
 });
+
+// Judge want check for revision() throw error and beforeEach 
+// to be in separate describe I don't know way :/
+
 describe('Test Warehouse', () => {
 
     it('check init => no params', () => {
