@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Bill</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <h2>Coffee Bill</h2>
+    <table id="bill">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="product-list"></tbody>
+        <tfoot>
+            <tr>
+                <td>Total:</td>
+                <td>0.00</td>
+            </tr>
+        </tfoot>
+    </table>
+    <section id="add-product">
+        <h3>Add new product</h3>
+        <label>
+            <span>
+                Product:
+            </span>
+            <input type="text">
+        </label>
+        <label>
+            <span>
+                Price:
+            </span>
+            <input type="number">
+        </label>
+        <button onclick="addProduct()">Add</button>
+    </section>
+
+    <script>
+        function addProduct() {
+            const inputs = document.querySelectorAll('input');
+            const product = inputs[0];
+            const price = inputs[1];
+            const productList = document.querySelector('#product-list');
+            const total = document.querySelector('tfoot > tr').children[1];
+
+            if (price.value > 0 && product.value && price.value) {
+                const tr = document.createElement('tr');
+                const tdProduct = document.createElement('td')
+                const tdPrice = document.createElement('td')
+                tdProduct.innerHTML = product.value;
+                tdPrice.innerHTML = price.value;
+                tr.appendChild(tdProduct);
+                tr.appendChild(tdPrice);
+                productList.appendChild(tr);
+                total.textContent = Number(total.textContent) + Number(price.value)
+            }
+            product.value = '';
+            price.value = '';
+        }
+    </script>
+
+</body>
+
+</html>
