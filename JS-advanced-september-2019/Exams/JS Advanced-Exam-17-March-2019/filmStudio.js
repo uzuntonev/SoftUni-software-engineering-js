@@ -11,14 +11,14 @@ class FilmStudio {
 
         if (this.films.length) {
 
-            for (let f of this.films) {
+            for (const f of this.films) {
 
-                let roles = f.filmRoles.filter((r) => r.role === role);
+                const roles = f.filmRoles.filter((r) => r.role === role);
 
                 if (roles.length) {
-                    let filmIndex = this.films.indexOf(f);
-                    let wantedRole = this.films[filmIndex].filmRoles.filter((fR) => fR.role === role)[0];
-                    let roleIndex = this.films[filmIndex].filmRoles.indexOf(wantedRole);
+                    const filmIndex = this.films.indexOf(f);
+                    const wantedRole = this.films[filmIndex].filmRoles.filter((fR) => fR.role === role)[0];
+                    const roleIndex = this.films[filmIndex].filmRoles.indexOf(wantedRole);
 
                     this.films[filmIndex].filmRoles[roleIndex].actor = actor;
                     isTheActorIsUnemployed = false;
@@ -42,24 +42,24 @@ class FilmStudio {
 
         if (arguments.length === 2) {
 
-            let firstArgIsString = typeof arguments[0] === 'string';
-            let secondArgIsArray = arguments[1] instanceof Array;
+            const firstArgIsString = typeof arguments[0] === 'string';
+            const secondArgIsArray = arguments[1] instanceof Array;
 
             if (firstArgIsString && secondArgIsArray) {
-                let findedFilms = this.films.filter((f) => f.filmName.includes(filmName));
+                const findedFilms = this.films.filter((f) => f.filmName.includes(filmName));
 
-                let filmRoles = roles.reduce((acc, cur) => {
-                    let curFilmRole = {
+                const filmRoles = roles.reduce((acc, cur) => {
+                    const curFilmRole = {
                         role: cur,
-                        actor: false
+                        actor: false,
                     };
                     acc.push(curFilmRole);
                     return acc;
                 }, []);
 
-                let film = {
+                const film = {
                     filmName,
-                    filmRoles
+                    filmRoles,
                 };
 
                 if (findedFilms.length > 0) {
@@ -68,18 +68,18 @@ class FilmStudio {
 
                 this.films.push(film);
                 return film;
-            } else {
-                throw ('Invalid arguments')
-            }
+            } 
+            throw ('Invalid arguments');
+            
 
         } else {
-            throw ('Invalid arguments count')
+            throw ('Invalid arguments count');
         }
     }
 
     lookForProducer(film) {
 
-        let f = this.films.filter((f) => f.filmName === film)[0];
+        const f = this.films.filter((f) => f.filmName === film)[0];
         let output;
 
         if (f) {
@@ -89,9 +89,11 @@ class FilmStudio {
                 output += `${f.filmRoles[role].actor} as ${f.filmRoles[role].role}\n`;
             });
         } else {
-            throw new Error(`${film} do not exist yet, but we need the money...`)
+            throw new Error(`${film} do not exist yet, but we need the money...`);
         }
 
         return output;
     }
 }
+
+module.exports = FilmStudio;

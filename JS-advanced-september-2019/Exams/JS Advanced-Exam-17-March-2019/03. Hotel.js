@@ -82,7 +82,13 @@ class Hotel {
             return output + 'There are currently no bookings.';
         }
 
-        return output + this.bookings.map(client => Object.entries(client).map(x => Array.isArray(x[1]) ? `${x[0]}: ${x[1].join(', ')}` : `${x[0]} - ${x[1]}`).join('\n')).join('\n----------\n');
+        return output + this.bookings.map(client => Object.entries(client)
+            .map(x => 
+                Array.isArray(x[1]) 
+                    ? `${x[0]}: ${x[1].join(', ')}` 
+                    : `${x[0]} - ${x[1]}`)
+            .join('\n'))
+            .join('\n----------\n');
     }
 }
 
