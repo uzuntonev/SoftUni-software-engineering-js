@@ -5,18 +5,18 @@ class SoftUniFy {
 
     downloadSong(artist, song, lyrics) {
         if (!this.allSongs[artist]) {
-            this.allSongs[artist] = {rate: 0, votes: 0, songs: []}
+            this.allSongs[artist] = { rate: 0, votes: 0, songs: [] };
         }
 
-        this.allSongs[artist]['songs'].push(`${song} - ${lyrics}`);
+        this.allSongs[artist].songs.push(`${song} - ${lyrics}`);
 
         return this;
     }
 
     playSong(song) {
-        let songArtists = Object.keys(this.allSongs).reduce((acc, cur) => {
+        const songArtists = Object.keys(this.allSongs).reduce((acc, cur) => {
 
-            let songs = this.allSongs[cur]['songs']
+            const songs = this.allSongs[cur].songs
                 .filter((songInfo) => songInfo
                     .split(/ - /)[0] === song);
 
@@ -27,8 +27,8 @@ class SoftUniFy {
             return acc;
         }, {});
 
-        let arr = Object.keys(songArtists);
-        let output = "";
+        const arr = Object.keys(songArtists);
+        let output = '';
 
         if(arr.length > 0){
 
@@ -38,18 +38,16 @@ class SoftUniFy {
             });
 
         } else {
-            output = `You have not downloaded a ${song} song yet. Use SoftUniFy's function downloadSong() to change that!`
+            output = `You have not downloaded a ${song} song yet. Use SoftUniFy's function downloadSong() to change that!`;
         }
 
         return output;
     }
 
     get songsList() {
-        let songs = Object.values(this.allSongs)
-            .map((v) => v['songs'])
-            .reduce((acc, cur) => {
-                return acc.concat(cur);
-            }, []);
+        const songs = Object.values(this.allSongs)
+            .map((v) => v.songs)
+            .reduce((acc, cur) => acc.concat(cur), []);
 
         let output;
 
@@ -64,23 +62,25 @@ class SoftUniFy {
     }
 
     rateArtist() {
-        let artistExist = this.allSongs[arguments[0]];
+        const artistExist = this.allSongs[arguments[0]];
         let output;
 
         if (artistExist) {
 
             if (arguments.length === 2) {
-                artistExist['rate'] += +arguments[1];
-                artistExist['votes'] += 1;
+                artistExist.rate += +arguments[1];
+                artistExist.votes += 1;
             }
 
-            let currentRate = (+(artistExist['rate'] / artistExist['votes']).toFixed(2));
+            const currentRate = (+(artistExist.rate / artistExist.votes).toFixed(2));
             isNaN(currentRate) ? output = 0 : output = currentRate;
 
         } else {
-            output = `The ${arguments[0]} is not on your artist list.`
+            output = `The ${arguments[0]} is not on your artist list.`;
         }
 
         return output;
     }
 }
+
+module.exports = SoftUniFy;

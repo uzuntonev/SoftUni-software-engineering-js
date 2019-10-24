@@ -1,26 +1,25 @@
 function solve() {
-    const inputs = document.querySelectorAll('form > input');
-    const book = inputs[0];
-    const year = inputs[1];
-    const price = inputs[2];
+    const [ book, year, price ] = Array.from(document.querySelectorAll('form > input'));
     const output = document.querySelector('#outputs').children;
     const oldBooksSection = output[0].querySelector('.bookShelf');
     const newBooksSection = output[1].querySelector('.bookShelf');
     const profit = document.querySelectorAll('h1')[1];
 
+    function createEl(tag, content){
+        const e = document.createElement(tag);
+        e.textContent = content;
+        return e;
+    }
+
     function createBook(b, y, pr) {
         pr = (y >= 2000 
             ? Number(pr) 
             : Number(pr) * 0.85).toFixed(2);
-
         const div = document.createElement('div');
         div.classList.add('book');
-        const p = document.createElement('p');
-        p.innerHTML = `${b} [${y}]`;
-        const btnBuy = document.createElement('button');
-        btnBuy.innerHTML = `Buy it only for ${pr} BGN`;
-        
-        div.appendChild(p);
+        const btnBuy = createEl('button', `Buy it only for ${pr} BGN`);
+
+        div.appendChild(createEl('p', `${b} [${y}]`));
         div.appendChild(btnBuy);
 
         btnBuy.addEventListener('click', (ev) => {
@@ -31,8 +30,7 @@ function solve() {
         });
 
         if(y >= 2000){
-            const btnMove = document.createElement('button');
-            btnMove.innerHTML = 'Move to old section';
+            const btnMove = createEl('button', 'Move to old section');
             div.appendChild(btnMove);
             btnMove.addEventListener('click', (ev) => {
                 pr = (Number(pr) * 0.85).toFixed(2);
