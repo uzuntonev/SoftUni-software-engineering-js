@@ -98,7 +98,7 @@ module.exports = {
         "space-in-parens": ["error", "never"], // Disallow spaces inside of parentheses
 
         /* promise rules */
-        "promise/always-return": "error",
+       /* "promise/always-return": "error",
         "promise/no-return-wrap": "error",
         "promise/param-names": "error",
         "promise/catch-or-return": "error",
@@ -112,7 +112,7 @@ module.exports = {
         "promise/valid-params": "warn",
         "promise/prefer-await-to-then": "error",
         "promise/prefer-await-to-callbacks": "error",
-
+       */ 
         /* babel */
         "babel/semi": "off",
     }
