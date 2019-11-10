@@ -18,10 +18,11 @@ function attachEvents() {
                 Object.entries(data).forEach(([ contactID, contact ]) => {
                     const li = document.createElement('li');
                     const btnDelete = document.createElement('button');
+                    const span = document.createElement('span');
                     btnDelete.textContent = 'Delete';
                     btnDelete.id = contactID;
-                    li.innerHTML = `${contact.person}: ${contact.phone}`;
-
+                    span.textContent = `${contact.person}: ${contact.phone}`;
+                    li.appendChild(span);
                     li.appendChild(btnDelete);
                     phonebookList.appendChild(li);
 
