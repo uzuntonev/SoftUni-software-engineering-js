@@ -7,6 +7,7 @@ function attachEvents() {
     const url = 'https://phonebook-ef107.firebaseio.com/phonebook/';
 
     function loadContacts() {
+        phonebookList.innerHTML = '';
         fetch(url + '.json')
             .then(res => {
                 if (!res.ok) {
