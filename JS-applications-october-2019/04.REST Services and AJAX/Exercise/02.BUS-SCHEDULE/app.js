@@ -21,7 +21,8 @@ function solve() {
                 info.textContent = `Next stop ${currentName}`;
                 btnDepart.disabled = true;
                 btnArrive.disabled = false;
-            });
+            })
+            .catch(err => console.log(err));
     }
 
     function arrive() {

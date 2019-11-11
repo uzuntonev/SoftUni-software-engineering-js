@@ -24,6 +24,9 @@ function getInfo() {
                     li.textContent = `Bus ${id} arrives in ${time}`;
                     busesList.appendChild(li);
                 });
+        })
+        .catch(err => {
+            stopName.textContent = 'Error';
+            console.log(err); 
         });
-    // .catch(err => stopName.textContent = 'Error');
 }

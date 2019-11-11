@@ -7,39 +7,31 @@ function attachEvents() {
     const inputContent = document.querySelector('#content');
     const textarea = document.querySelector('#messages');
     let keys;
-    const url = 'https://fir-eb382.firebaseio.com/messanger/.json';
+    const url = (x = '') => `https://fir-eb382.firebaseio.com/messanger/${x}.json`;
 
     function sendMessage() {
         if(inputAuthor.value === '' || inputContent === ''){
             alert('Please fill input fields!');
             throw new Error('Input fields are empty!');
         }
+
         const headers = {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ author: inputAuthor.value, content: inputContent.value }),
         };
 
-        fetch(url, headers)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Something went wrong!');
-                }
-                return res.json();
-            })
-            .then(() => {
-                clearMessages();
-            });
+        fetch(url(), headers)
+            .then(handlerError)
+            .then(res => res.json())
+            .then(clearMessages)
+            .catch(err => console.log(err));
     }
 
     function displayMessages() {
-        fetch(url)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error('Something went wrong!');
-                }
-                return res.json();
-            })
+        fetch(url())
+            .then(handlerError)
+            .then(res => res.json())
             .then(data => {
                 if(data === null){
                     textarea.value = 'There is no more messages!';
@@ -50,13 +42,8 @@ function attachEvents() {
                     .map(msg => `${msg.author}: ${msg.content}`)
                     .join('\n');
                 textarea.value = messages;
-            });
-    }
-
-    function clearMessages() {
-        textarea.value = '';
-        inputAuthor.value = '';
-        inputContent.value = '';
+            })
+            .catch(err => console.log(err));
     }
 
     function deleteMessage() {
@@ -64,12 +51,26 @@ function attachEvents() {
             textarea.value = 'There is no more messages!';
             throw new Error ('DB is empty !');
         }
-        const deleteUrl = url.slice(0, -5) + keys.pop() + '.json';
-        fetch(deleteUrl, { method: 'DELETE' })
-            .then(()=>{
+        const headers = { method: 'DELETE' };
+        const lastMsg = keys.pop();
 
-                displayMessages();
-            });
+        fetch(url(lastMsg), headers)
+            .then(handlerError)
+            .then(displayMessages)
+            .catch(err => console.log(err));
+    }
+
+    function handlerError(res){
+        if (!res.ok) {
+            throw new Error(`Something went wrong! Status: ${res.status}, Status text: ${res.statusText}`);
+        }
+        return res;
+    }
+
+    function clearMessages() {
+        textarea.value = '';
+        inputAuthor.value = '';
+        inputContent.value = '';
     }
 
     btnDelete.addEventListener('click', deleteMessage);
