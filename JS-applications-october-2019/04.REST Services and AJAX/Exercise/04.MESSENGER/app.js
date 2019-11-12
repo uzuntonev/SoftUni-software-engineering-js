@@ -18,14 +18,14 @@ function attachEvents() {
         const headers = {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ author: inputAuthor.value, content: inputContent.value }),
+            body: { author: inputAuthor.value, content: inputContent.value },
         };
 
         fetch(url(), headers)
             .then(handlerError)
             .then(res => res.json())
             .then(clearMessages)
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function displayMessages() {
@@ -43,7 +43,7 @@ function attachEvents() {
                     .join('\n');
                 textarea.value = messages;
             })
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function deleteMessage() {
@@ -57,7 +57,7 @@ function attachEvents() {
         fetch(url(lastMsg), headers)
             .then(handlerError)
             .then(displayMessages)
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function handlerError(res){

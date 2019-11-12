@@ -13,7 +13,7 @@ function attachEvents() {
             .then(handlerError)
             .then(res => res.json())
             .then(loadHTML)
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function createContact() {
@@ -31,7 +31,7 @@ function attachEvents() {
             .then(handlerError)
             .then(loadContacts)
             .then(cleaner)
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function deleteContact() {
@@ -42,7 +42,7 @@ function attachEvents() {
             .then(handlerError)
             .then(loadContacts)
             .then(cleaner)
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function loadHTML(data) {

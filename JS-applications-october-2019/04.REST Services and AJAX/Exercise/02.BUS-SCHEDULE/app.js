@@ -22,7 +22,7 @@ function solve() {
                 btnDepart.disabled = true;
                 btnArrive.disabled = false;
             })
-            .catch(err => console.log(err));
+            .catch(console.error);
     }
 
     function arrive() {

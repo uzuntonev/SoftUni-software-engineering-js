@@ -27,6 +27,6 @@ function getInfo() {
         })
         .catch(err => {
             stopName.textContent = 'Error';
-            console.log(err); 
+            console.error(err);
         });
 }
