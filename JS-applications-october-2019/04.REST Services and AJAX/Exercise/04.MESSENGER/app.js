@@ -10,7 +10,7 @@ function attachEvents() {
     const url = (x = '') => `https://fir-eb382.firebaseio.com/messanger/${x}.json`;
 
     function sendMessage() {
-        if(inputAuthor.value === '' || inputContent === ''){
+        if(inputAuthor.value === '' || inputContent.value === ''){
             alert('Please fill input fields!');
             throw new Error('Input fields are empty!');
         }
