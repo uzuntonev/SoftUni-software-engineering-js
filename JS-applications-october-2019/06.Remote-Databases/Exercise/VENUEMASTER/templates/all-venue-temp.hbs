@@ -1,0 +1,6 @@
+{{#each venues}}
+<div class="venue" id="{{_id}}">
+    <span class="venue-name">{{name}}<input class="info" type="button" value="More info"></span>
+    {{> moreInfo}}
+</div>
+{{/each}}

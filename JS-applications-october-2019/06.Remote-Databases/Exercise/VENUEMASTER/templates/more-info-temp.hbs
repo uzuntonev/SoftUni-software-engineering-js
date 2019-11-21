@@ -1,0 +1,23 @@
+<div class="venue-details" style="display: none;">
+    <table>
+        <tr>
+            <th>Ticket Price</th>
+            <th>Quantity</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td class="venue-price">{{price}} lv</td>
+            <td><select class="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></td>
+            <td><input class="purchase" type="button" value="Purchase"></td>
+        </tr>
+    </table>
+    <span class="head">Venue description:</span>
+    <p class="description">{{description}}</p>
+    <p class="description">Starting time: {{startingHour}}</p>
+</div>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <form class="form-inline">
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Order by:</label>
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <option value="id">ID</option>
+                <option value="firstName">First Name</option>
+                <option value="lastName">Last name</option>
+                <option value="grade">Grade</option>
+                <option value="facultyNumber">Faculty Number</option>
+            </select>
+
+        </form>
+        <button id="sortStudents" type="submit" class="btn btn-primary my-1">Sort</button>
+        <button id="displayStudents" type="submit" class="btn btn-primary my-1">Display Students</button>
+
+    </div>
+
+    <!-- <div class="header">
+
+
+        <div>
+                <span>Order by:</span>
+                <select name="sort" id="sort">
+                    <option value="id">ID</option>
+                    <option value="firstName">First Name</option>
+                    <option value="lastName">Last name</option>
+                    <option value="grade">Grade</option>
+                    <option value="facultyNumber">Faculty Number</option>
+                </select>
+                <button id="sortStudents">Sort</button>
+        </div>
+
+    </div> -->
+    <table id="results">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Faculty Number</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+    </table>
+
+    <form>
+        <h3>ADD STUDENT</h3>
+        <label>First Name</label>
+        <input type="text" id="firstName" placeholder="First name...">
+        <label>Last Name</label>
+        <input type="text" id="lastName" placeholder="Last name...">
+        <label>Faculty Number</label>
+        <input type="text" id="facultyNumber" placeholder="Faculty Number...">
+        <label>Grade</label>
+        <input type="number" id="grade" placeholder="Grade...">
+        <button id="addStudent" type="submit" class="btn btn-primary my-1">Submit</button>
+    </form>
+
+
+
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>
