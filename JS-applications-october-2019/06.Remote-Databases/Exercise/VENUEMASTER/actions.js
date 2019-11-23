@@ -17,9 +17,9 @@ export function actions(html) {
             alert(err);
             console.error(err);
         }
-        const venuesDate = allIds.map(id => get('appdata', `venues/${id}`));
+        const allVenues = allIds.map(id => get('appdata', `venues/${id}`));
 
-        const context = { venues: await Promise.all(venuesDate) };
+        const context = { venues: await Promise.all(allVenues) };
 
         await partialRegistration('moreInfo', 'templates/more-info-temp.hbs');
 
@@ -27,24 +27,26 @@ export function actions(html) {
     }
 
     function displayMoreInfo(ev) {
-        const divMoreInfo = ev.target.parentNode.parentNode.querySelector('.venue-details');
+        const id = ev.target.parentNode.parentNode.id;
 
         [ ...html.root().children ].forEach(div => {
-            div.querySelector('.venue-details').style.display = 'none';
+            div.id === id
+                ? div.querySelector('.venue-details').style.display = 'block'
+                : div.querySelector('.venue-details').style.display = 'none';
         });
-
-        if (divMoreInfo.style.display === 'none') {
-            divMoreInfo.style.display = 'block';
-            state.name = ev.target.parentNode.textContent;
-            state.id = ev.target.parentNode.parentNode.id;
-        } else {
-            divMoreInfo.style.display = 'none';
-        }
     }
 
     async function displayConfirmation(ev) {
-        state.price = parseInt(ev.target.parentNode.parentNode.querySelector('.venue-price').textContent);
-        state.qty = ev.target.parentNode.parentNode.querySelector('.quantity').value;
+        const currentElement = ev.target.closest('.venue');
+        const id = currentElement.id;
+        const price = parseInt(currentElement.querySelector('.venue-price').textContent);
+        const name = currentElement.querySelector('.venue-name').textContent;
+        const qty = currentElement.querySelector('.quantity').value;
+
+        state.id = id;
+        state.price = price;
+        state.name = name;
+        state.qty = qty;
 
         const template = await getTemplate('templates/confirm-temp.hbs');
         const context = { ...state };

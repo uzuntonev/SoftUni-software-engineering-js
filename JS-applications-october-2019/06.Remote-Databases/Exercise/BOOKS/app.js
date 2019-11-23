@@ -114,8 +114,8 @@ function builtBookRow(book) {
     btnEdit.textContent = 'Edit';
     btnDelete.textContent = 'Delete';
     tdBtns.setAttribute('data-id', _id);
-    btnEdit.id = 'editBtn';
-    btnDelete.id = 'deleteBtn';
+    btnEdit.className = 'editBtn';
+    btnDelete.className = 'deleteBtn';
 
     tdBtns.append(btnEdit, btnDelete);
     tr.append(tdTitle, tdAuthor, tdIsbn, tdBtns);
@@ -126,7 +126,10 @@ function builtBookRow(book) {
 async function handler(ev) {
     ev.preventDefault();
     if (typeof actions[ev.target.id] === 'function') {
-        await actions[ev.target.id](ev);
+        await actions[ev.target.id]();
+    }
+    if (typeof actions[ev.target.className] === 'function') {
+        await actions[ev.target.className](ev);
     }
 }
 
