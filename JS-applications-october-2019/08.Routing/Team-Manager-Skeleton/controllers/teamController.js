@@ -1,5 +1,5 @@
 import { getSessionInfo, loadAllPartials } from '../scripts/helpers.js';
-import { get, put } from '../scripts/requester.js';
+import { get, post, put } from '../scripts/requester.js';
 
 
 export const teamController = {
@@ -18,8 +18,8 @@ export const teamController = {
                 if (author === ctx.username) {
                     ctx.isAuthor = true;
                 }
-          
-                if(members.find(x => x.username === ctx.username)){
+
+                if (members.find(x => x.username === ctx.username)) {
                     ctx.isOnTeam = true;
                 }
 
@@ -41,7 +41,7 @@ export const teamController = {
         const id = ctx.params.teamId;
 
         get('appdata', `teams/${id}`, 'Kinvey')
-            .then(teamInfo => { 
+            .then(teamInfo => {
                 teamInfo.members.push({ username: ctx.username });
 
                 put('appdata', `teams/${id}`, teamInfo, 'Kinvey')
@@ -51,19 +51,46 @@ export const teamController = {
             });
     },
 
-    renderEditTeamForm: function (ctx) {
+    renderCreateTeam: function (ctx) {
+        getSessionInfo(ctx);
+
+        const partials = loadAllPartials({ createForm: '../templates/create/createForm.hbs' });
+
+        this.loadPartials(partials)
+            .then(function () {
+                this.partial('../templates/create/createPage.hbs');
+            });
+    },
+
+    postCreateTeam: function (ctx) {
+        getSessionInfo(ctx);
+        // TODO Validation data !
+        const { name, comment } = ctx.params;
+        const author = ctx.username;
+        const members = [
+            { username: ctx.username },
+        ];
+
+        post('appdata', 'teams', { name, comment, members, author }, 'Kinvey')
+            .then(res => {
+                ctx.redirect('#/catalog');
+            })
+            .catch(console.error);
+    },
+
+    renderEditTeam: function (ctx) {
         getSessionInfo(ctx);
         const partials = loadAllPartials({ editForm: '../templates/edit/editForm.hbs' });
 
         ctx.teamId = ctx.params.teamId;
 
         this.loadPartials(partials)
-            .then(function (){
+            .then(function () {
                 this.partial('../templates/edit/editPage.hbs');
             });
     },
 
-    postEditForm: function (ctx) {
+    postEditTeam: function (ctx) {
         const { name, comment, teamId } = ctx.params;
 
         get('appdata', `teams/${teamId}`, 'Kinvey')
@@ -71,19 +98,19 @@ export const teamController = {
                 teamInfo.name = name;
                 teamInfo.comment = comment;
 
-                put('appdata',`teams/${teamId}`, teamInfo,'Kinvey')
-                    .then(res=>{
-                        ctx.redirect(`#/catalog/${teamId}`); 
+                put('appdata', `teams/${teamId}`, teamInfo, 'Kinvey')
+                    .then(res => {
+                        ctx.redirect(`#/catalog/${teamId}`);
                     });
             });
-     
+
     },
 
     leaveTeam: function (ctx) {
         getSessionInfo(ctx);
         const { teamId } = ctx.params;
 
-        get('appdata', `teams/${teamId}`,'Kinvey')
+        get('appdata', `teams/${teamId}`, 'Kinvey')
             .then(teamInfo => {
                 const { members } = teamInfo;
 
@@ -92,7 +119,7 @@ export const teamController = {
                 put('appdata', `teams/${teamId}`, teamInfo, 'Kinvey')
                     .then(res => {
                         ctx.redirect(`#/catalog/${teamId}`);
-                    }); 
+                    });
             });
     },
 
