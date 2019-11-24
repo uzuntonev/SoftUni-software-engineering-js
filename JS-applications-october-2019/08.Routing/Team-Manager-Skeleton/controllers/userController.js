@@ -50,8 +50,15 @@ export const userController = {
     },
     
     logout: function (ctx){
-        sessionStorage.clear();
-        ctx.redirect('#/home');
+        post('user', '_logout', {}, 'Kinvey')
+            .then(res => {
+                console.log(res); 
+                sessionStorage.clear();
+                ctx.redirect('#/home');
+            })
+            .catch(err => {
+                console.error(err);
+            });
     },
 };
 

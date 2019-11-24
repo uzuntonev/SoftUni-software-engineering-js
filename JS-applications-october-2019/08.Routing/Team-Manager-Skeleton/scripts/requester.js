@@ -31,13 +31,15 @@ function handleError(res){
     if (!res.ok) { 
         throw new Error(`Something went wrong! Status: ${res.status}, Status text: ${res.statusText}`);
     }
-    return res;
+    if(res.status === 204){
+        return res;
+    }
+    return res.json();
 }
 
 function fetchData(module, endpoint, headers) {
     return fetch(`${baseUrl}/${module}/${appKey}/${endpoint}`, headers)
-        .then(handleError)
-        .then(res => res.json());
+        .then(handleError);
 }
 
 export function get(module, endpoint, type) {

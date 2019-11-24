@@ -51,7 +51,4 @@ export const catalogController = {
             })
             .catch(console.error);
     },
-
-
-
 };
