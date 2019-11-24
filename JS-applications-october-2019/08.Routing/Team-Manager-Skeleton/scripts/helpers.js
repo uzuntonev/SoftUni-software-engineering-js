@@ -10,16 +10,19 @@ export function passwordCheck(password, rePassword) {
     return true;
 }
 
-export function userCheck(user){
-
-}
-
 export function getSessionInfo(ctx) {
     for (const key in sessionStorage) {
         if (sessionStorage.hasOwnProperty(key)) {
             ctx[key] = sessionStorage[key];
         }
     }
+}
+
+export function setSessionInfo(response){
+    sessionStorage.setItem('loggedIn', true);
+    sessionStorage.setItem('userId',response._id);
+    sessionStorage.setItem('username',response.username);
+    sessionStorage.setItem('authtoken', response._kmd.authtoken);
 }
 
 export function loadAllPartials(partials) {

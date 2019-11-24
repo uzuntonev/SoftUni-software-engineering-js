@@ -1,4 +1,4 @@
-import { passwordCheck, loadAllPartials } from '../scripts/helpers.js';
+import { passwordCheck, loadAllPartials, setSessionInfo } from '../scripts/helpers.js';
 import { post } from '../scripts/requester.js';
 
 export const userController = {
@@ -16,8 +16,9 @@ export const userController = {
 
         if (passwordCheck(password, repeatPassword)){
             post('user', '', { username, password }, 'Basic')
-                .then(res => {
-                    ctx.redirect('#/login');
+                .then(userInfo => {
+                    setSessionInfo(userInfo);
+                    ctx.redirect('#/home');
                 })
                 .catch(console.error);
         }
@@ -37,10 +38,7 @@ export const userController = {
 
         post('user','login', { username, password }, 'Basic')
             .then(userInfo =>{
-                sessionStorage.setItem('loggedIn', true);
-                sessionStorage.setItem('userId',userInfo._id);
-                sessionStorage.setItem('username',userInfo.username);
-                sessionStorage.setItem('authtoken', userInfo._kmd.authtoken);
+                setSessionInfo(userInfo);
                 ctx.redirect('#/home'); 
             })
             .catch(err => {
@@ -52,7 +50,6 @@ export const userController = {
     logout: function (ctx){
         post('user', '_logout', {}, 'Kinvey')
             .then(res => {
-                console.log(res); 
                 sessionStorage.clear();
                 ctx.redirect('#/home');
             })

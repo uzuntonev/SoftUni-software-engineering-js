@@ -8,7 +8,7 @@ const app = Sammy('#main', function () {
     this.use('Handlebars', 'hbs');
 
     // Home Controller
-    this.get('#/', homeController.renderHome);
+    this.get('/', homeController.renderHome);
 
     this.get('#/home', homeController.renderHome);
 
