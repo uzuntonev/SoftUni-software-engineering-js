@@ -2,20 +2,14 @@ import { getSessionInfo, loadAllPartials } from '../scripts/helpers.js';
 
 
 export const homeController ={
-    renderHome: function (ctx) {
+    getHome: function (ctx) {
         getSessionInfo(ctx);
-        const partials = loadAllPartials({});
-
-        this.loadPartials(partials).then(function (){
-            this.partial('../templates/home/home.hbs');
-        });
+        loadAllPartials(ctx)
+            .partial('../templates/home/home.hbs');
     },
-    renderAbout: function (ctx) {
+    getAbout: function (ctx) {
         getSessionInfo(ctx);
-        const partials = loadAllPartials({});
-        
-        this.loadPartials(partials).then(function (){
-            this.partial('../templates/about/about.hbs');
-        });
+        loadAllPartials(ctx)
+            .partial('../templates/about/about.hbs');
     },
 };

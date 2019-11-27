@@ -5,30 +5,30 @@ import{ teamController } from '../controllers/teamController.js';
 
 export default function Router(app){
     // Home Controller
-    app.get('/', homeController.renderHome);
-    app.get('#/home', homeController.renderHome);
-    app.get('#/about', homeController.renderAbout);
+    app.get('/', homeController.getHome);
+    app.get('#/home', homeController.getHome);
+    app.get('#/about', homeController.getAbout);
 
     // User Controller
-    app.get('#/register', userController.renderRegister);
+    app.get('#/register', userController.getRegister);
     app.post('#/register', userController.postRegister);
 
-    app.get('#/login', userController.renderLogin);
+    app.get('#/login', userController.getLogin);
     app.post('#/login', userController.postLogin);
 
     app.get('#/logout', userController.logout);
 
     // Catalog Controller
-    app.get('#/catalog', catalogController.renderCatalog);
+    app.get('#/catalog', catalogController.getCatalog);
     
     // Team Controller
-    app.get('#/create', teamController.renderCreateTeam);
+    app.get('#/create', teamController.getCreateTeam);
     app.post('#/create', teamController.postCreateTeam);
     
-    app.get('#/edit/:teamId', teamController.renderEditTeam);
+    app.get('#/edit/:teamId', teamController.getEditTeam);
     app.post('#/edit/:teamId', teamController.postEditTeam);
 
-    app.get('#/catalog/:id',teamController.renderTeamInfo);
+    app.get('#/catalog/:id',teamController.getTeamInfo);
 
     app.get('#/join/:teamId', teamController.joinToTeam);
 

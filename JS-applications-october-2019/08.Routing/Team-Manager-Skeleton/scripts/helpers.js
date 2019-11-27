@@ -10,22 +10,24 @@ export function passwordCheck(password, rePassword) {
     return true;
 }
 
-export function getSessionInfo(ctx) {
-    for (const key in sessionStorage) {
-        if (sessionStorage.hasOwnProperty(key)) {
-            ctx[key] = sessionStorage[key];
-        }
-    }
+export function checkInput() {
+    return [ ...arguments ].some(x => x.trim() === '');
 }
 
-export function setSessionInfo(response){
-    sessionStorage.setItem('loggedIn', true);
-    sessionStorage.setItem('userId',response._id);
-    sessionStorage.setItem('username',response.username);
+export function getSessionInfo(ctx) {
+    ctx.authtoken = sessionStorage.getItem('authtoken');
+    ctx.username = sessionStorage.getItem('username');
+    ctx.userId = sessionStorage.getItem('userId');
+    ctx.loggedIn = sessionStorage.getItem('authtoken') !== null;
+}
+
+export function setSessionInfo(response) {
+    sessionStorage.setItem('userId', response._id);
+    sessionStorage.setItem('username', response.username);
     sessionStorage.setItem('authtoken', response._kmd.authtoken);
 }
 
-export function loadAllPartials(partials) {
+export function loadAllPartials(ctx, partials) {
     const defaultPartials = {
         header: '../templates/common/header.hbs',
         footer: '../templates/common/footer.hbs',
@@ -36,5 +38,5 @@ export function loadAllPartials(partials) {
             defaultPartials[key] = partials[key];
         }
     }
-    return defaultPartials;
+    return ctx.loadPartials(defaultPartials);
 }
